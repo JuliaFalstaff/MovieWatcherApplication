@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Movie Watcher</string>
     <string name="title">Title</string>
     <string name="description">Description</string>
     <string name="year_of_release">Year of release</string>
@@ -7,4 +7,7 @@
     <string name="favourite_text">Favourite Movie</string>
     <string name="rated_text">High Rated Movies</string>
     <string name="detailed_text">Detailed Movie fragment</string>
+    <string name="action_home">Main</string>
+    <string name="action_favourite">Favourite</string>
+    <string name="action_rated">High Rated</string>
 </resources>

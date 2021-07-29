@@ -27,6 +27,8 @@
             android:layout_height="wrap_content"
             android:text="@string/description"
             android:textSize="@dimen/text_size"
+            android:padding="@dimen/padding"
+            android:layout_marginBottom="@dimen/margin_40_dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -43,39 +45,44 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageViewPoster"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="402dp"
+            android:layout_height="634dp"
+            android:layout_marginStart="@dimen/margin_8_dp"
+            android:scaleType="centerCrop"
             android:src="@drawable/poster_lost_in_translation"
-            android:scaleType="fitCenter"
             app:layout_constraintBottom_toTopOf="@+id/textViewDescription"
             app:layout_constraintEnd_toStartOf="@+id/textViewTitle"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:background="@color/teal_700" />
+            app:layout_constraintVertical_bias="0.348" />
 
         <TextView
             android:id="@+id/textViewGenre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="4dp"
+            android:layout_marginTop="@dimen/margin_40_dp"
             android:text="@string/genre"
             android:textSize="@dimen/text_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textViewYearOfRelease" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    <FrameLayout
-        android:id="@+id/loadingLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/loadingBackground"
-        android:visibility="gone"
-        tools:visibility="visible">
 
-        <ProgressBar
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
-    </FrameLayout>
+        <FrameLayout
+            android:id="@+id/loadingLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:visibility="gone"
+            tools:layout_editor_absoluteX="9dp"
+            tools:layout_editor_absoluteY="5dp"
+            tools:visibility="visible">
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+        </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </FrameLayout>
