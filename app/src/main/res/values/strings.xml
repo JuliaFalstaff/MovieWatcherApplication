@@ -10,4 +10,6 @@
     <string name="action_home">Main</string>
     <string name="action_favourite">Favourite</string>
     <string name="action_rated">High Rated</string>
+    <string name="error_appstate">Error</string>
+    <string name="reload_appstate">Reload</string>
 </resources>

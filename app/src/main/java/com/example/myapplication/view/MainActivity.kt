@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        if (savedInstanceState == null) {
+        if (savedInstanceState == null)  {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.container, MainFragment.newInstance())
                 .commitNow()
@@ -28,7 +28,6 @@ class MainActivity : AppCompatActivity() {
         initView()
     }
 
-    //через binding больше не видит container после преобразования xml для toolbar с меню. В чем может быть причина? Он не видит вложенные layouts?
     private fun addFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.container, fragment)

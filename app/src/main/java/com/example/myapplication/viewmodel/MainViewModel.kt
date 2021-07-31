@@ -11,6 +11,7 @@ import java.lang.Thread.sleep
 class MainViewModel(private  val repository: Repository = RepositoryImpl()): ViewModel() {
 
     private val liveDataToObserve: MutableLiveData<AppState> = MutableLiveData()
+    private val timer: Long = 1000
 
     fun getData(): LiveData<AppState> {
         return liveDataToObserve
@@ -21,7 +22,7 @@ class MainViewModel(private  val repository: Repository = RepositoryImpl()): Vie
     private fun getDataFromLocalSource() {
         liveDataToObserve.value = AppState.Loading
         Thread {
-            sleep(1000)
+            sleep(timer)
             liveDataToObserve.postValue(AppState.Success(repository.getMovieFromLocalStorage()))
         }.start()
     }
@@ -29,7 +30,7 @@ class MainViewModel(private  val repository: Repository = RepositoryImpl()): Vie
     fun getMovieFromRemoteSource() {
         liveDataToObserve.value = AppState.Loading
         Thread {
-            sleep(2000)
+            sleep(timer)
             liveDataToObserve.postValue(AppState.Success(repository.getMovieFromServer()))
         }.start()
     }

@@ -54,8 +54,8 @@ class MainFragment : Fragment() {
             }
             is AppState.Error -> {
                 binding.loadingLayout.visibility = View.GONE
-                Snackbar.make(binding.main, "Error", Snackbar.LENGTH_INDEFINITE)
-                        .setAction("Reload") {viewModel.getMovieFromRemoteSource()}
+                Snackbar.make(binding.main, R.string.error_appstate, Snackbar.LENGTH_INDEFINITE)
+                        .setAction(R.string.reload_appstate) {viewModel.getMovieFromRemoteSource()}
                         .show()
             }
         }
