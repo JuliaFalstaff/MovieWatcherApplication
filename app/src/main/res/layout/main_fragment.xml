@@ -11,67 +11,20 @@
         android:layout_height="match_parent"
         tools:context=".view.MainFragment">
 
-        <TextView
-            android:id="@+id/textViewTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/title"
-            android:textSize="@dimen/text_size"
-            android:textStyle="bold"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mainFragmentRecyclerView"
+            android:layout_width="498dp"
+            android:layout_height="925dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textViewDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/description"
-            android:textSize="@dimen/text_size"
-            android:padding="@dimen/padding"
-            android:layout_marginBottom="@dimen/margin_40_dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/textViewYearOfRelease"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/year_of_release"
-            android:textSize="@dimen/text_size"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
-
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/imageViewPoster"
-            android:layout_width="402dp"
-            android:layout_height="634dp"
-            android:layout_marginStart="@dimen/margin_8_dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/poster_lost_in_translation"
-            app:layout_constraintBottom_toTopOf="@+id/textViewDescription"
-            app:layout_constraintEnd_toStartOf="@+id/textViewTitle"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.348" />
-
-        <TextView
-            android:id="@+id/textViewGenre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_40_dp"
-            android:text="@string/genre"
-            android:textSize="@dimen/text_size"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textViewYearOfRelease" />
+            tools:listitem="@layout/main_fragment_recycler_item" />
 
         <FrameLayout
             android:id="@+id/loadingLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
             android:visibility="gone"
             tools:layout_editor_absoluteX="9dp"
             tools:layout_editor_absoluteY="5dp"

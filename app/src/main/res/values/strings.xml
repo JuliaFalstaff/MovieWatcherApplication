@@ -12,4 +12,6 @@
     <string name="action_rated">High Rated</string>
     <string name="error_appstate">Error</string>
     <string name="reload_appstate">Reload</string>
+    <string name="popularity">popularity</string>
+    <string name="runtime">Runtime</string>
 </resources>
