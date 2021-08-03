@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import com.example.myapplication.R
 import com.example.myapplication.databinding.MainFragmentBinding
@@ -25,6 +24,20 @@ class MainFragment : Fragment() {
     private var _binding: MainFragmentBinding? = null
     private val binding get() = _binding!!
 
+    private val adapter = MainFragmentAdapter(object : OnItemViewClickListener {
+        override fun onItemViewClick(movie: Movie) {
+            val manager = activity?.supportFragmentManager
+            if (manager != null) {
+                val bundle = Bundle()
+                bundle.putParcelable(DetailedMovieFragment.BUNDLE_EXTRA, movie)
+                manager.beginTransaction()
+                    .add(R.id.container, DetailedMovieFragment.newInstance(bundle))
+                    .addToBackStack("")
+                    .commitAllowingStateLoss()
+            }
+        }
+    })
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         _binding = MainFragmentBinding.inflate(inflater, container, false)
@@ -37,6 +50,7 @@ class MainFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding.mainFragmentRecyclerView.adapter = adapter
         val observer = Observer<AppState> {renderData(it)}
         viewModel.getData().observe(viewLifecycleOwner, observer)
         viewModel.getMovieFromLocalSource()
@@ -45,9 +59,8 @@ class MainFragment : Fragment() {
     private fun renderData(appState: AppState) {
         when(appState) {
             is AppState.Success -> {
-                val movieData = appState.movieData
                 binding.loadingLayout.visibility = View.GONE
-                populateData(movieData)
+                adapter.setMovie(appState.movieData)
             }
             is AppState.Loading -> {
                 binding.loadingLayout.visibility = View.VISIBLE
@@ -55,24 +68,20 @@ class MainFragment : Fragment() {
             is AppState.Error -> {
                 binding.loadingLayout.visibility = View.GONE
                 Snackbar.make(binding.main, R.string.error_appstate, Snackbar.LENGTH_INDEFINITE)
-                        .setAction(R.string.reload_appstate) {viewModel.getMovieFromRemoteSource()}
+                        .setAction(R.string.reload_appstate) {viewModel.getMovieFromLocalSource()}
                         .show()
             }
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+
+    override fun onDestroy() {
+        adapter.removeListener()
         _binding = null
+        super.onDestroy()
     }
 
-    private fun populateData(movieData: Movie) {
-        with(binding) {
-            textViewTitle.text = movieData.originalTitle
-            textViewYearOfRelease.text = movieData.releaseDate.toString()
-            textViewDescription.text = movieData.overview
-            textViewGenre.text = movieData.genres
-        }
+    interface OnItemViewClickListener {
+        fun onItemViewClick(movie: Movie)
     }
-
 }
