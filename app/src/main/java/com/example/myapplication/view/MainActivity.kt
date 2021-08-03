@@ -2,14 +2,11 @@ package com.example.myapplication.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.renderscript.ScriptGroup
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.example.myapplication.R
-import com.example.myapplication.databinding.AppBarBinding
-import com.example.myapplication.databinding.ContentMainBinding
 import com.example.myapplication.databinding.MainActivityBinding
 
 class MainActivity : AppCompatActivity() {

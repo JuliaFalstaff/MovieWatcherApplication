@@ -36,13 +36,14 @@ class MainFragmentAdapter(private var onItemViewClickListener: MainFragment.OnIt
     }
 
     inner class MainViewHolder(val binding: MainFragmentRecyclerItemBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(movie: Movie) {
-            binding.textViewPopularity.text = movie.popularity.toString()
-            binding.textViewTitle.text = movie.originalTitle
-            binding.textViewGenre.text = movie.genres
-            binding.textViewYearOfRelease.text = movie.releaseDate.toString()
-            binding.imageViewPoster.setImageResource(movie.posterPath)
-            binding.root.setOnClickListener { onItemViewClickListener?.onItemViewClick(movie) }
+
+        fun bind(movie: Movie) = with(binding) {
+            textViewPopularity.text = movie.popularity.toString()
+            textViewTitle.text = movie.originalTitle
+            textViewGenre.text = movie.genres
+            textViewYearOfRelease.text = movie.releaseDate.toString()
+            imageViewPoster.setImageResource(movie.posterPath)
+            root.setOnClickListener { onItemViewClickListener?.onItemViewClick(movie) }
         }
     }
 }
