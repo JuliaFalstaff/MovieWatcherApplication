@@ -14,7 +14,7 @@ class MainFragmentAdapter(private var onItemViewClickListener: MainFragment.OnIt
     private var movieData: List<Movie> = listOf()
 
     fun removeListener() {
-        onItemViewClickListener= null
+        onItemViewClickListener = null
     }
 
     fun setMovie(data: List<Movie>) {
