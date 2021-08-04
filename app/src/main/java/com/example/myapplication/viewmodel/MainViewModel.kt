@@ -13,9 +13,7 @@ class MainViewModel(private  val repository: Repository = RepositoryImpl()): Vie
     private val liveDataToObserve: MutableLiveData<AppState> = MutableLiveData()
     private val timer: Long = 1000
 
-    fun getData(): LiveData<AppState> {
-        return liveDataToObserve
-    }
+    fun getData(): LiveData<AppState> = liveDataToObserve
 
     fun getMovieFromLocalSource() = getDataFromLocalSource()
 

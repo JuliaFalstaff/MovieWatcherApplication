@@ -26,14 +26,13 @@ class MainFragment : Fragment() {
 
     private val adapter = MainFragmentAdapter(object : OnItemViewClickListener {
         override fun onItemViewClick(movie: Movie) {
-            val manager = activity?.supportFragmentManager
-            if (manager != null) {
-                val bundle = Bundle()
-                bundle.putParcelable(DetailedMovieFragment.BUNDLE_EXTRA, movie)
-                manager.beginTransaction()
-                    .add(R.id.container, DetailedMovieFragment.newInstance(bundle))
-                    .addToBackStack("")
-                    .commitAllowingStateLoss()
+            activity?.supportFragmentManager?.apply {
+                beginTransaction()
+                        .add(R.id.container, DetailedMovieFragment.newInstance(Bundle().apply {
+                            putParcelable(DetailedMovieFragment.BUNDLE_EXTRA, movie)
+                        }))
+                        .addToBackStack("")
+                        .commitAllowingStateLoss()
             }
         }
     })
@@ -51,13 +50,13 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.mainFragmentRecyclerView.adapter = adapter
-        val observer = Observer<AppState> {renderData(it)}
+        val observer = Observer<AppState> { renderData(it) }
         viewModel.getData().observe(viewLifecycleOwner, observer)
         viewModel.getMovieFromLocalSource()
     }
 
     private fun renderData(appState: AppState) {
-        when(appState) {
+        when (appState) {
             is AppState.Success -> {
                 binding.loadingLayout.visibility = View.GONE
                 adapter.setMovie(appState.movieData)
@@ -67,13 +66,11 @@ class MainFragment : Fragment() {
             }
             is AppState.Error -> {
                 binding.loadingLayout.visibility = View.GONE
-                Snackbar.make(binding.main, R.string.error_appstate, Snackbar.LENGTH_INDEFINITE)
-                        .setAction(R.string.reload_appstate) {viewModel.getMovieFromLocalSource()}
-                        .show()
+                binding.main.showSnackBar(getString(R.string.error_appstate), getString(R.string.reload_appstate),
+                { viewModel.getMovieFromLocalSource() })
             }
         }
     }
-
 
     override fun onDestroy() {
         adapter.removeListener()

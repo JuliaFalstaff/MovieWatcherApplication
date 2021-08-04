@@ -26,8 +26,8 @@ class DetailedMovieFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         binding = FragmentDetailedMovieBinding.inflate(inflater, container, false)
         return binding.root
@@ -35,15 +35,16 @@ class DetailedMovieFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val movie = arguments?.getParcelable<Movie>(BUNDLE_EXTRA)
-        if (movie != null) {
-            binding.textViewDescription.text = movie.overview
-            binding.textViewTitle.text = movie.originalTitle
-            binding.textViewGenre.text = movie.genres
-            binding.textViewYearOfRelease.text = movie.releaseDate.toString()
-            binding.imageViewPoster.setImageResource(movie.posterPath)
-            binding.textViewPopularity.text = movie.popularity.toString()
-            binding.textViewRuntime.text = movie.runtime.toString()
+        with(binding) {
+            arguments?.getParcelable<Movie>(BUNDLE_EXTRA)?.let { movie ->
+                textViewDescription.text = movie.overview
+                textViewTitle.text = movie.originalTitle
+                textViewGenre.text = movie.genres
+                textViewYearOfRelease.text = movie.releaseDate.toString()
+                imageViewPoster.setImageResource(movie.posterPath)
+                textViewPopularity.text = movie.popularity.toString()
+                textViewRuntime.text = movie.runtime.toString()
+            }
         }
     }
 }
