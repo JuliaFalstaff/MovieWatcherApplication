@@ -6,6 +6,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Movie(
+        val id: Int = 0,
         val originalTitle: String? = "",
         val title: String? = "",
         val genres: String? = "",
@@ -18,6 +19,7 @@ data class Movie(
 
 fun getMovieList() = listOf(
         Movie(
+                0,
                 "Lost in Translation",
                 "Lost in Translation",
                 "Drama",
@@ -28,6 +30,7 @@ fun getMovieList() = listOf(
                 95
         ),
         Movie(
+                1,
                 "Manhattan",
                 "Manhattan",
                 "drama",
@@ -38,6 +41,7 @@ fun getMovieList() = listOf(
                 120
         ),
         Movie(
+                2,
                 "Криминальное Чтиво",
                 "Криминальное Чтиво",
                 "crime",
@@ -49,6 +53,7 @@ fun getMovieList() = listOf(
                 110
         ),
         Movie(
+                3,
                 "Сломанные цветы",
                 "Сломанные цветы",
                 "drama",
@@ -60,6 +65,7 @@ fun getMovieList() = listOf(
                 95
         ),
         Movie(
+                4,
                 "Твин Пикс",
                 "Твин Пикс",
                 "thriller",
@@ -71,6 +77,7 @@ fun getMovieList() = listOf(
                 0
         ),
         Movie(
+                5,
                 "Французский диспетчер",
                 "Французский диспетчер",
                 "comedy",

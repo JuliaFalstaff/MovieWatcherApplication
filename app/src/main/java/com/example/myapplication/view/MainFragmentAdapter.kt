@@ -36,7 +36,7 @@ class MainFragmentAdapter(private var onItemViewClickListener: MainFragment.OnIt
         return movieData.size
     }
 
-    inner class MainViewHolder(val binding: MainFragmentRecyclerItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class MainViewHolder(private val binding: MainFragmentRecyclerItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(movie: Movie) = with(binding) {
             textViewPopularity.text = movie.averageVote.toString()
