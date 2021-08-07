@@ -22,9 +22,6 @@ import java.net.URL
 import java.util.stream.Collectors
 import javax.net.ssl.HttpsURLConnection
 
-private const val API_KEY = "3d4eed70b3bf0c001506c22b79833ff1"
-private const val LANGUAGE = "en-US"
-
 class DetailedMovieFragment : Fragment() {
 
     private lateinit var binding: FragmentDetailedMovieBinding
@@ -58,40 +55,20 @@ class DetailedMovieFragment : Fragment() {
             movieBundle = arguments?.getParcelable<Movie>(BUNDLE_EXTRA) ?: Movie()
             main.visibility = View.VISIBLE
             loadingLayout.visibility = View.GONE
-            loadMovie()
+            val loader = MovieLoader(onLoadListener)
+            loader.loadMovie()
         }
     }
-
-    @RequiresApi(Build.VERSION_CODES.N)
-    private fun loadMovie() {
-        try {
-        val uri = URL("https://developers.themoviedb.org/3/discover?$API_KEY&$LANGUAGE")
-        val handler = Handler(Looper.myLooper()!!)
-        Thread(Runnable {
-            lateinit var urlConnection: HttpsURLConnection
-            try {
-                urlConnection = uri.openConnection() as HttpsURLConnection
-                urlConnection.requestMethod = "GET"
-                urlConnection.readTimeout = 10000
-                val bufferedReader = BufferedReader(InputStreamReader(urlConnection.inputStream))
-                val movieDTO: MovieDTO = Gson().fromJson(getLines(bufferedReader), MovieDTO::class.java)
-                handler.post { displayMovie(movieDTO) }
-            } catch (e: Exception) {
-                Log.e("MOVIE", "Fail connection", e)
-                e.printStackTrace()
-            } finally {
-                urlConnection.disconnect()
-            }
-        }).start()
-        } catch (e: MalformedURLException) {
-            Log.e("MOVIE", "Fail URI", e)
-            e.printStackTrace()
+    
+    private val onLoadListener = object : MovieLoader.MovieLoaderListener {
+        override fun onLoaded(movieDTO: MovieDTO) {
+            displayMovie(movieDTO)
         }
-    }
 
-    @RequiresApi(Build.VERSION_CODES.N)
-    private fun getLines(reader: BufferedReader): String {
-        return reader.lines().collect(Collectors.joining("\n"))
+        override fun onFailed(throwable: Throwable) {
+            Log.e("MOVIE", "onFailed Execption")
+        }
+
     }
 
     private fun displayMovie(movieDTO: MovieDTO) {
