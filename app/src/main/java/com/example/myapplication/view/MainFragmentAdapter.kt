@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.databinding.MainFragmentRecyclerItemBinding
 import com.example.myapplication.model.data.Movie
 
+
 class MainFragmentAdapter(private var onItemViewClickListener: MainFragment.OnItemViewClickListener?) :
     RecyclerView.Adapter<MainFragmentAdapter.MainViewHolder>()  {
 
@@ -38,8 +39,9 @@ class MainFragmentAdapter(private var onItemViewClickListener: MainFragment.OnIt
     inner class MainViewHolder(val binding: MainFragmentRecyclerItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(movie: Movie) = with(binding) {
-            textViewPopularity.text = movie.popularity.toString()
-            textViewTitle.text = movie.originalTitle
+            textViewPopularity.text = movie.averageVote.toString()
+            textViewOriginalTitle.text = movie.originalTitle
+            textViewTitle.text = movie.title
             textViewGenre.text = movie.genres
             textViewYearOfRelease.text = movie.releaseDate.toString()
             imageViewPoster.setImageResource(movie.posterPath)

@@ -7,16 +7,18 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Movie(
         val originalTitle: String? = "",
+        val title: String? = "",
         val genres: String? = "",
         val releaseDate: Int? = 0,
         val overview: String? = "",
         val posterPath: Int = 0,
-        val popularity: Number = 0,
+        val averageVote: Int = 0,
         val runtime: Int = 0
 ) : Parcelable
 
 fun getMovieList() = listOf(
         Movie(
+                "Lost in Translation",
                 "Lost in Translation",
                 "Drama",
                 2004,
@@ -27,6 +29,7 @@ fun getMovieList() = listOf(
         ),
         Movie(
                 "Manhattan",
+                "Manhattan",
                 "drama",
                 1974,
                 "Желая бросить опостылевшую работу и привычный круг знакомств, телевизионный сценарист заводит роман с любовницей своего друга.\n",
@@ -35,6 +38,7 @@ fun getMovieList() = listOf(
                 120
         ),
         Movie(
+                "Криминальное Чтиво",
                 "Криминальное Чтиво",
                 "crime",
                 1994,
@@ -46,6 +50,7 @@ fun getMovieList() = listOf(
         ),
         Movie(
                 "Сломанные цветы",
+                "Сломанные цветы",
                 "drama",
                 2005,
                 "Утро для престарелого «Дон Жуана» Дона Джонстона начинается с того, разбирая почту, Дон обнаруживает розовый конверт. В письме неизвестная сообщает, что двадцать лет назад, расставшись с Доном, обнаружила, что беременна. Показав письмо другу Уинстону - любителю детективов - Дон получил от того совет: вспомнить всех своих подружек,\n" +
@@ -56,6 +61,7 @@ fun getMovieList() = listOf(
         ),
         Movie(
                 "Твин Пикс",
+                "Твин Пикс",
                 "thriller",
                 1990,
                 "История начинается с известия о находке обнаженного тела старшеклассницы Лоры Палмер, завёрнутого в полиэтилен и выброшенного волнами на берег озера.\n" +
@@ -65,6 +71,7 @@ fun getMovieList() = listOf(
                 0
         ),
         Movie(
+                "Французский диспетчер",
                 "Французский диспетчер",
                 "comedy",
                 2021,

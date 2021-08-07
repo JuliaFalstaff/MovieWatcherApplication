@@ -14,6 +14,8 @@ import com.example.myapplication.model.data.Movie
 import com.example.myapplication.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 
+private const val API_KEY = "3d4eed70b3bf0c001506c22b79833ff1"
+
 class MainFragment : Fragment() {
 
     companion object {
@@ -23,6 +25,7 @@ class MainFragment : Fragment() {
     private lateinit var viewModel: MainViewModel
     private var _binding: MainFragmentBinding? = null
     private val binding get() = _binding!!
+    private lateinit var movieBundle: Movie
 
     private val adapter = MainFragmentAdapter(object : OnItemViewClickListener {
         override fun onItemViewClick(movie: Movie) {

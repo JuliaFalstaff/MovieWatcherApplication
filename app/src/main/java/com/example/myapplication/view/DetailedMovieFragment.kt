@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import com.example.myapplication.databinding.FragmentDetailedMovieBinding
 import com.example.myapplication.model.data.Movie
 
+
+
 class DetailedMovieFragment : Fragment() {
 
     private lateinit var binding: FragmentDetailedMovieBinding
@@ -38,12 +40,13 @@ class DetailedMovieFragment : Fragment() {
         with(binding) {
             arguments?.getParcelable<Movie>(BUNDLE_EXTRA)?.let { movie ->
                 textViewDescription.text = movie.overview
-                textViewTitle.text = movie.originalTitle
+                textViewTitle.text = movie.title
                 textViewGenre.text = movie.genres
                 textViewYearOfRelease.text = movie.releaseDate.toString()
                 imageViewPoster.setImageResource(movie.posterPath)
-                textViewPopularity.text = movie.popularity.toString()
+                textViewPopularity.text = movie.averageVote.toString()
                 textViewRuntime.text = movie.runtime.toString()
+                textViewOriginalTitle.text = movie.originalTitle.toString()
             }
         }
     }
