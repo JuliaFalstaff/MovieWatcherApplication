@@ -75,11 +75,11 @@ class MainFragment : Fragment() {
         }
     }
 
-    override fun onDestroy() {
-        adapter.removeListener()
-        _binding = null
-        super.onDestroy()
-    }
+//    override fun onDestroy() {
+//        adapter.removeListener()
+//        _binding = null
+//        super.onDestroy()
+//    }
 
     interface OnItemViewClickListener {
         fun onItemViewClick(movie: Movie)

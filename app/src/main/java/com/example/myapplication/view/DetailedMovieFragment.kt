@@ -11,6 +11,7 @@ import androidx.annotation.RequiresApi
 import com.example.myapplication.databinding.FragmentDetailedMovieBinding
 import com.example.myapplication.model.data.Movie
 import com.example.myapplication.model.dto.MovieDTO
+import kotlinx.android.synthetic.main.fragment_detailed_movie.*
 import kotlinx.android.synthetic.main.main_fragment.*
 
 class DetailedMovieFragment : Fragment() {
@@ -33,7 +34,7 @@ class DetailedMovieFragment : Fragment() {
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+            savedInstanceState: Bundle?,
     ): View? {
         binding = FragmentDetailedMovieBinding.inflate(inflater, container, false)
         return binding.root
@@ -42,15 +43,17 @@ class DetailedMovieFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        movieBundle = arguments?.getParcelable<Movie>(BUNDLE_EXTRA) ?: Movie()
+
         with(binding) {
-            movieBundle = arguments?.getParcelable<Movie>(BUNDLE_EXTRA) ?: Movie()
-            main.visibility = View.GONE
-            loadingLayout.visibility = View.VISIBLE
+            detailedMovieView.visibility = View.GONE
+            detailedLoadingLayout.visibility = View.VISIBLE
             val loader = MovieLoader(onLoadListener, movieBundle.id)
             loader.loadMovie()
         }
+
     }
-    
+
     private val onLoadListener = object : MovieLoader.MovieLoaderListener {
         override fun onLoaded(movieDTO: MovieDTO) {
             displayMovie(movieDTO)
@@ -64,8 +67,8 @@ class DetailedMovieFragment : Fragment() {
 
     private fun displayMovie(movieDTO: MovieDTO) {
         with(binding) {
-            main.visibility = View.VISIBLE
-            loadingLayout.visibility = View.GONE
+            detailedMovieView.visibility = View.VISIBLE
+            detailedLoadingLayout.visibility = View.GONE
             val id = movieBundle.id
             textViewOriginalTitle.text = movieDTO.results?.original_title
             textViewDescription.text = movieDTO.results?.overview
