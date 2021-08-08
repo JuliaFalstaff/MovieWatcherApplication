@@ -44,9 +44,9 @@ class DetailedMovieFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
             movieBundle = arguments?.getParcelable<Movie>(BUNDLE_EXTRA) ?: Movie()
-            main.visibility = View.VISIBLE
-            loadingLayout.visibility = View.GONE
-            val loader = MovieLoader(onLoadListener)
+            main.visibility = View.GONE
+            loadingLayout.visibility = View.VISIBLE
+            val loader = MovieLoader(onLoadListener, movieBundle.id)
             loader.loadMovie()
         }
     }
@@ -66,6 +66,7 @@ class DetailedMovieFragment : Fragment() {
         with(binding) {
             main.visibility = View.VISIBLE
             loadingLayout.visibility = View.GONE
+            val id = movieBundle.id
             textViewOriginalTitle.text = movieDTO.results?.original_title
             textViewDescription.text = movieDTO.results?.overview
             textViewTitle.text = movieDTO.results?.title
