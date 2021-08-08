@@ -29,7 +29,7 @@ class MainViewModel(private  val repository: Repository = RepositoryImpl()): Vie
         liveDataToObserve.value = AppState.Loading
         Thread {
             sleep(timer)
-            liveDataToObserve.postValue(AppState.Success(repository.getMovieFromServer()))
+            liveDataToObserve.postValue(AppState.Success(listOf(repository.getMovieFromServer())))
         }.start()
     }
 }
