@@ -1,9 +1,7 @@
 package com.example.myapplication.view
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.databinding.MainFragmentRecyclerItemBinding
 import com.example.myapplication.model.data.Movie
@@ -39,12 +37,12 @@ class MainFragmentAdapter(private var onItemViewClickListener: MainFragment.OnIt
     inner class MainViewHolder(private val binding: MainFragmentRecyclerItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(movie: Movie) = with(binding) {
-            textViewPopularity.text = movie.averageVote.toString()
-            textViewOriginalTitle.text = movie.originalTitle
+            textViewPopularity.text = movie.vote_average.toString()
+            textViewOriginalTitle.text = movie.original_title
             textViewTitle.text = movie.title
             textViewGenre.text = movie.genres
-            textViewYearOfRelease.text = movie.releaseDate.toString()
-            imageViewPoster.setImageResource(movie.posterPath)
+            textViewYearOfRelease.text = movie.release_date.toString()
+            imageViewPoster.setImageResource(movie.poster_path)
             root.setOnClickListener { onItemViewClickListener?.onItemViewClick(movie) }
         }
     }

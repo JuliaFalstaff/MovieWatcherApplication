@@ -2,8 +2,6 @@ package com.example.myapplication.view
 
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,14 +11,7 @@ import androidx.annotation.RequiresApi
 import com.example.myapplication.databinding.FragmentDetailedMovieBinding
 import com.example.myapplication.model.data.Movie
 import com.example.myapplication.model.dto.MovieDTO
-import com.google.gson.Gson
 import kotlinx.android.synthetic.main.main_fragment.*
-import java.io.BufferedReader
-import java.io.InputStreamReader
-import java.net.MalformedURLException
-import java.net.URL
-import java.util.stream.Collectors
-import javax.net.ssl.HttpsURLConnection
 
 class DetailedMovieFragment : Fragment() {
 
@@ -75,12 +66,12 @@ class DetailedMovieFragment : Fragment() {
         with(binding) {
             main.visibility = View.VISIBLE
             loadingLayout.visibility = View.GONE
-            textViewOriginalTitle.text = movieDTO.results?.originalTitle
+            textViewOriginalTitle.text = movieDTO.results?.original_title
             textViewDescription.text = movieDTO.results?.overview
             textViewTitle.text = movieDTO.results?.title
-            textViewYearOfRelease.text = movieDTO.results?.releaseDate.toString()
+            textViewYearOfRelease.text = movieDTO.results?.release_date.toString()
 //            imageViewPoster.setImageResource(movieDTO.results?.backdropPath)
-            textViewPopularity.text = movieDTO.results?.voteAverage.toString()
+            textViewPopularity.text = movieDTO.results?.vote_average.toString()
         }
     }
 }

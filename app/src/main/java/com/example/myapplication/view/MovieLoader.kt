@@ -17,12 +17,12 @@ import javax.net.ssl.HttpsURLConnection
 private const val API_KEY = "3d4eed70b3bf0c001506c22b79833ff1"
 private const val LANGUAGE = "en-US"
 
-class MovieLoader (private val listener: MovieLoaderListener) {
+class MovieLoader (private val listener: MovieLoaderListener, private val id: Int) {
 
     @RequiresApi(Build.VERSION_CODES.N)
     fun loadMovie() {
         try {
-            val uri = URL("https://developers.themoviedb.org/3/discover?$API_KEY&$LANGUAGE")
+            val uri = URL("https://api.themoviedb.org/3/movie/${id}?api_key=$API_KEY&language=$LANGUAGE")
             val handler = Handler(Looper.myLooper()!!)
             Thread(Runnable {
                 lateinit var urlConnection: HttpsURLConnection

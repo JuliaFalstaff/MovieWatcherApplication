@@ -2,12 +2,12 @@ package com.example.myapplication.model.dto
 
 data class ResultsDTO (
         val id: Int?,
-        val originalTitle: String?,
+        val original_title: String?,
         val overview: String?,
-        val posterPath: String?,
-        val backdropPath: String?,
-        val releaseDate: String?,
+        val poster_path: String?,
+        val backdrop_path: String?,
+        val release_date: String?,
         val title: String?,
-        val voteAverage: Double?,
-
-)
+        val vote_average: Double?,
+        val runtime: Int?
+        )
