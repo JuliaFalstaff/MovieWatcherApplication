@@ -19,6 +19,7 @@ class DetailedMovieFragment : Fragment() {
 
     companion object {
         const val BUNDLE_EXTRA = "movie"
+        
         fun newInstance(bundle: Bundle): DetailedMovieFragment {
             val fragment = DetailedMovieFragment()
             fragment.arguments = bundle
@@ -74,6 +75,7 @@ class DetailedMovieFragment : Fragment() {
             textViewYearOfRelease.text = movieDTO.release_date.toString()
 //            imageViewPoster.setImageResource(movieDTO.results?.poster_path.toString())
             textViewPopularity.text = movieDTO.vote_average.toString()
+            textViewRuntime.text = movieDTO.runtime.toString()
 
         }
     }
