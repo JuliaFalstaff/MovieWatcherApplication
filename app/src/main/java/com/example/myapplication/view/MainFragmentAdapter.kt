@@ -40,7 +40,6 @@ class MainFragmentAdapter(private var onItemViewClickListener: MainFragment.OnIt
             textViewPopularity.text = movie.vote_average.toString()
             textViewOriginalTitle.text = movie.original_title
             textViewTitle.text = movie.title
-            textViewGenre.text = movie.genres
             textViewYearOfRelease.text = movie.release_date.toString()
             movie.poster_path?.let { imageViewPoster.setImageResource(it) }
             root.setOnClickListener { onItemViewClickListener?.onItemViewClick(movie) }

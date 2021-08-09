@@ -10,5 +10,4 @@ data class ResultsDTO (
         val title: String?,
         val vote_average: Double?,
         val runtime: Int?,
-        val genres: String?
         )

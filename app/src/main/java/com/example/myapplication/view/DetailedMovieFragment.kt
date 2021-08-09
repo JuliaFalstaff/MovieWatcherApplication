@@ -11,8 +11,6 @@ import androidx.annotation.RequiresApi
 import com.example.myapplication.databinding.FragmentDetailedMovieBinding
 import com.example.myapplication.model.data.Movie
 import com.example.myapplication.model.dto.MovieDTO
-import kotlinx.android.synthetic.main.fragment_detailed_movie.*
-import kotlinx.android.synthetic.main.main_fragment.*
 
 class DetailedMovieFragment : Fragment() {
 
@@ -70,12 +68,13 @@ class DetailedMovieFragment : Fragment() {
             detailedMovieView.visibility = View.VISIBLE
             detailedLoadingLayout.visibility = View.GONE
             val id = movieBundle.id
-            textViewOriginalTitle.text = movieDTO.results?.original_title
-            textViewDescription.text = movieDTO.results?.overview
-            textViewTitle.text = movieDTO.results?.title
-            textViewYearOfRelease.text = movieDTO.results?.release_date.toString()
-//            imageViewPoster.setImageResource(movieDTO.results?.backdropPath)
-            textViewPopularity.text = movieDTO.results?.vote_average.toString()
+            textViewOriginalTitle.text = movieDTO.original_title
+            textViewDescription.text = movieDTO.overview
+            textViewTitle.text = movieDTO.title
+            textViewYearOfRelease.text = movieDTO.release_date.toString()
+//            imageViewPoster.setImageResource(movieDTO.results?.poster_path.toString())
+            textViewPopularity.text = movieDTO.vote_average.toString()
+
         }
     }
 }

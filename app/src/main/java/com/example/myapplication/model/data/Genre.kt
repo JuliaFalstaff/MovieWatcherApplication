@@ -1,0 +1,7 @@
+package com.example.filmapp.model.entites
+
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+data class Genre(val name: String) : Parcelable

@@ -17,7 +17,7 @@ import javax.net.ssl.HttpsURLConnection
 private const val API_KEY = "3d4eed70b3bf0c001506c22b79833ff1"
 private const val LANGUAGE = "en-US"
 
-class MovieLoader (private val listener: MovieLoaderListener, private val id: Int) {
+class MovieLoader (private val listener: MovieLoaderListener, private var id: Int) {
 
     @RequiresApi(Build.VERSION_CODES.N)
     fun loadMovie() {
