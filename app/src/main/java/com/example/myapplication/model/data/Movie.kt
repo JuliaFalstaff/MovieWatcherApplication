@@ -21,7 +21,7 @@ fun getMovieList() = listOf(
         Movie(
                 153,
                 "Lost in Translation",
-                "Lost in Translation",
+                "Трудности Перевода",
                 "Drama",
                 2004,
                 "Билл Мюррей и Скарлетт Йоханссон в фильме Софии Копполы",
@@ -32,7 +32,7 @@ fun getMovieList() = listOf(
         Movie(
                 696,
                 "Manhattan",
-                "Manhattan",
+                "Манхэттен",
                 "drama",
                 1974,
                 "Желая бросить опостылевшую работу и привычный круг знакомств, телевизионный сценарист заводит роман с любовницей своего друга.\n",
@@ -42,7 +42,7 @@ fun getMovieList() = listOf(
         ),
         Movie(
                 680,
-                "Криминальное Чтиво",
+                "Pulp Fiction",
                 "Криминальное Чтиво",
                 "crime",
                 1994,
@@ -54,7 +54,7 @@ fun getMovieList() = listOf(
         ),
         Movie(
                 308,
-                "Сломанные цветы",
+                "Broken Flowers",
                 "Сломанные цветы",
                 "drama",
                 2005,
@@ -66,7 +66,7 @@ fun getMovieList() = listOf(
         ),
         Movie(
                 1923,
-                "Твин Пикс",
+                "Twin Peaks",
                 "Твин Пикс",
                 "thriller",
                 1990,
@@ -78,7 +78,7 @@ fun getMovieList() = listOf(
         ),
         Movie(
                 542178,
-                "Французский диспетчер",
+                "French Dispatch",
                 "Французский диспетчер",
                 "comedy",
                 2021,
