@@ -1,5 +1,8 @@
 package com.example.myapplication.view
 
+import android.content.Intent
+import android.content.IntentFilter
+import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -8,6 +11,9 @@ import android.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.example.myapplication.R
 import com.example.myapplication.databinding.MainActivityBinding
+import com.example.myapplication.service.MainBroadcastReceiver
+
+private val receiver = MainBroadcastReceiver()
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,6 +29,7 @@ class MainActivity : AppCompatActivity() {
                 .commitNow()
         }
         initView()
+        registerReceiver(receiver, IntentFilter(ConnectivityManager.EXTRA_NO_CONNECTIVITY))
     }
 
     private fun addFragment(fragment: Fragment) {
@@ -62,6 +69,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onDestroy() {
+        unregisterReceiver(receiver)
+        super.onDestroy()
     }
 }
 
