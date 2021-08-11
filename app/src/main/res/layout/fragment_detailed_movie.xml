@@ -26,6 +26,17 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/textViewOriginalTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/originalTitle"
+            android:textAlignment="textStart"
+            android:textSize="@dimen/text_size"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
+
+        <TextView
             android:id="@+id/textViewDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -37,16 +48,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageViewPoster"
-            app:layout_constraintVertical_bias="0.088" />
+            app:layout_constraintVertical_bias="0.622" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageViewPoster"
             android:layout_width="334dp"
             android:layout_height="489dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
             android:scaleType="centerCrop"
             android:src="@drawable/poster_lost_in_translation"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewOriginalTitle" />
 
         <TextView
             android:id="@+id/textViewYearOfRelease"
@@ -114,5 +127,22 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewRuntime" />
 
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <FrameLayout
+        android:id="@+id/detailedLoadingLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        tools:layout_editor_absoluteX="9dp"
+        tools:layout_editor_absoluteY="5dp"
+        tools:visibility="visible">
+
+        <ProgressBar
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+    </FrameLayout>
 </FrameLayout>

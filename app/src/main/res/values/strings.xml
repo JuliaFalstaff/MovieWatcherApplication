@@ -14,4 +14,5 @@
     <string name="reload_appstate">Reload</string>
     <string name="popularity">popularity</string>
     <string name="runtime">Runtime</string>
+    <string name="originalTitle">Original Title</string>
 </resources>

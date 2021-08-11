@@ -1,85 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="8dp">
 
-    <TextView
-        android:id="@+id/textViewTitle"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="@string/title"
-        android:layout_margin="@dimen/margin_8_dp"
-        android:textSize="@dimen/text_size"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewYearOfRelease"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.217"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textViewPopularity"
-        android:layout_width="141dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="104dp"
-        android:text="@string/popularity"
-        android:textAlignment="textStart"
-        android:textSize="@dimen/text_size"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewGenre" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageViewPoster"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="fitStart"
+            android:src="@drawable/poster_lost_in_translation" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ImageViewPopularity"
-        android:layout_width="42dp"
-        android:layout_height="42dp"
-        android:layout_marginEnd="20dp"
-        android:src="@drawable/ic_action_rated"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewPopularity"
-        app:layout_constraintEnd_toStartOf="@+id/textViewPopularity"
-        app:layout_constraintHorizontal_bias="0.75"
-        app:layout_constraintTop_toTopOf="@+id/textViewPopularity"
-        app:layout_constraintVertical_bias="1.0" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+            <TextView
+                android:id="@+id/textViewTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/padding"
+                android:layout_weight="1"
+                android:text="@string/title"
+                android:textSize="@dimen/text_size"
+                android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textViewYearOfRelease"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_8_dp"
-        android:text="@string/year_of_release"
-        android:textSize="@dimen/text_size"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.386"
-        app:layout_constraintStart_toEndOf="@+id/textViewTitle"
-        app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/textViewYearOfRelease"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/year_of_release"
+                android:textSize="@dimen/text_size" />
+        </LinearLayout>
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imageViewPoster"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/poster_lost_in_translation"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewPopularity" />
+        <TextView
+            android:id="@+id/textViewOriginalTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/padding"
+            android:layout_weight="1"
+            android:text="@string/originalTitle"
+            android:textAlignment="textStart"
+            android:textSize="@dimen/text_size"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textViewGenre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_start_12"
-        android:layout_marginTop="@dimen/margin_40_dp"
-        android:text="@string/genre"
-        android:textSize="@dimen/text_size"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.481"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textViewYearOfRelease" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/textViewGenre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/padding"
+                android:layout_marginBottom="@dimen/margin_4_dp"
+                android:layout_weight="1"
+                android:text="@string/genre"
+                android:textSize="@dimen/text_size" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ImageViewPopularity"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:layout_marginBottom="@dimen/margin_4_dp"
+                android:src="@drawable/ic_action_rated" />
+
+            <TextView
+                android:id="@+id/textViewPopularity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="@string/popularity"
+                android:textAlignment="textStart"
+                android:textSize="@dimen/text_size"
+                android:layout_marginBottom="@dimen/margin_4_dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
 
