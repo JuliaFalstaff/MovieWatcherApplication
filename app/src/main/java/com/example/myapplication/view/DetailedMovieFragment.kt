@@ -3,17 +3,19 @@ package com.example.myapplication.view
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.myapplication.databinding.FragmentDetailedMovieBinding
 import com.example.myapplication.model.data.Movie
 import com.example.myapplication.model.dto.MovieDTO
+import com.example.myapplication.service.DetailsService
 import com.example.myapplication.service.ID_MOVIE
 
 const val DETAILS_INTENT_FILTER = "DETAILS_INTENT_FILTER"
@@ -88,6 +90,9 @@ class DetailedMovieFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        context?.let {
+            LocalBroadcastManager.getInstance(it).registerReceiver(loadResultsReceiver, IntentFilter(DETAILS_INTENT_FILTER))
+        }
     }
 
     override fun onCreateView(
@@ -102,25 +107,21 @@ class DetailedMovieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         movieBundle = arguments?.getParcelable<Movie>(BUNDLE_EXTRA) ?: Movie()
+        getMovie()
+    }
 
+    private fun getMovie() {
         with(binding) {
             detailedMovieView.visibility = View.GONE
             detailedLoadingLayout.visibility = View.VISIBLE
-            val loader = MovieLoader(onLoadListener, movieBundle.id)
-            loader.loadMovie()
         }
-
-    }
-
-    private val onLoadListener = object : MovieLoader.MovieLoaderListener {
-        override fun onLoaded(movieDTO: MovieDTO) {
-            displayMovie(movieDTO)
+        context?.let {
+            it.startService(Intent(it, DetailsService::class.java).apply {
+                putExtra(
+                        ID_MOVIE, movieBundle.id
+                )
+            })
         }
-
-        override fun onFailed(throwable: Throwable) {
-            Log.e("MOVIE", "onFailed Execption")
-        }
-
     }
 
     private fun renderData(movieDTO: MovieDTO) = with(binding) {
@@ -145,22 +146,13 @@ class DetailedMovieFragment : Fragment() {
             textViewPopularity.text = movieDTO.vote_average.toString()
             textViewRuntime.text = movieDTO.runtime.toString()
         }
-
-
     }
 
-    private fun displayMovie(movieDTO: MovieDTO) {
-        with(binding) {
-            detailedMovieView.visibility = View.VISIBLE
-            detailedLoadingLayout.visibility = View.GONE
-            val id = movieBundle.id
-            textViewOriginalTitle.text = movieDTO.original_title
-            textViewDescription.text = movieDTO.overview
-            textViewTitle.text = movieDTO.title
-            textViewYearOfRelease.text = movieDTO.release_date.toString()
-            textViewPopularity.text = movieDTO.vote_average.toString()
-            textViewRuntime.text = movieDTO.runtime.toString()
+    override fun onDestroyView() {
+        context?.let {
+            LocalBroadcastManager.getInstance(it).unregisterReceiver(loadResultsReceiver)
         }
+        super.onDestroyView()
     }
 }
 
