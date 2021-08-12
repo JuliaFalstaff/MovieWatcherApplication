@@ -17,7 +17,7 @@ import javax.net.ssl.HttpsURLConnection
 private const val API_KEY = "3d4eed70b3bf0c001506c22b79833ff1"
 private const val LANGUAGE = "en-US"
 
-class MovieLoader (private val listener: MovieLoaderListener, private var id: Int) {
+class MovieLoader(private val listener: MovieLoaderListener, private var id: Int) {
 
     @RequiresApi(Build.VERSION_CODES.N)
     fun loadMovie() {
@@ -32,7 +32,7 @@ class MovieLoader (private val listener: MovieLoaderListener, private var id: In
                     urlConnection.readTimeout = 10000
                     val bufferedReader = BufferedReader(InputStreamReader(urlConnection.inputStream))
                     val movieDTO: MovieDTO = Gson().fromJson(getLines(bufferedReader), MovieDTO::class.java)
-                    handler.post { listener.onLoaded(movieDTO)}
+                    handler.post { listener.onLoaded(movieDTO) }
                 } catch (e: Exception) {
                     Log.e("MOVIE", "Fail connection", e)
                     e.printStackTrace()

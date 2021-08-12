@@ -36,12 +36,11 @@ const val DETAILS_REQUEST_ERROR_EXTRA = "DETAILS_REQUEST_ERROR_EXTRA"
 const val DETAILS_REQUEST_ERROR_MESSAGE_EXTRA = "DETAILS_REQUEST_ERROR_MESSAGE_EXTRA"
 const val DETAILS_ID_MOVIE = "DETAILS_ID_MOVIE"
 private const val PROCESS_ERROR = "Обработка ошибки"
-private const val DETAILS_URL_MALFORMED_EXTRA = "URL MALFORMED"
+const val DETAILS_URL_MALFORMED_EXTRA = "URL MALFORMED"
 private const val INVALID_PROPERTY = 0
 private const val INVALID_PROPERTY_STRING = "null"
-
-
-
+const val DEFAULT_VALUE = 0
+const val DEFAULT_DOUBLE_VALUE = 0.0
 
 
 class DetailedMovieFragment : Fragment() {
@@ -78,8 +77,8 @@ class DetailedMovieFragment : Fragment() {
                                 intent.getStringExtra(DETAILS_BACKDROP_PATH),
                                 intent.getStringExtra(DETAILS_RELEASE_DATE),
                                 intent.getStringExtra(DETAILS_TITLE),
-                                intent.getDoubleExtra(DETAILS_VOTE_AVERAGE, 0.0),
-                                intent.getIntExtra(DETAILS_RUNTIME, 0)
+                                intent.getDoubleExtra(DETAILS_VOTE_AVERAGE, DEFAULT_DOUBLE_VALUE),
+                                intent.getIntExtra(DETAILS_RUNTIME, DEFAULT_VALUE)
                         )
                 )
                 else -> TODO(PROCESS_ERROR)

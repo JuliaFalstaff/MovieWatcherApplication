@@ -20,9 +20,10 @@ private const val REQUEST_TIMEOUT = 10000
 const val ID_MOVIE = "ID"
 private const val API_KEY = "3d4eed70b3bf0c001506c22b79833ff1"
 private const val LANGUAGE = "en-US"
+private const val DEFAULT_VALUE = 0
 
 
-class DetailsService(name : String = "DetailsService") : IntentService(name) {
+class DetailsService(name: String = "DetailsService") : IntentService(name) {
 
     private val broadcastIntent = Intent(DETAILS_INTENT_FILTER)
 
@@ -31,7 +32,7 @@ class DetailsService(name : String = "DetailsService") : IntentService(name) {
         if (intent == null) {
             onEmptyIntent()
         } else {
-            val id = intent.getIntExtra(ID_MOVIE, 0)
+            val id = intent.getIntExtra(ID_MOVIE, DEFAULT_VALUE)
             if (id == 0) {
                 onEmptyData()
             } else {
@@ -61,12 +62,12 @@ class DetailsService(name : String = "DetailsService") : IntentService(name) {
             }
         } catch (e: MalformedURLException) {
             onMalformedURL()
-
         }
     }
 
     private fun onMalformedURL() {
-        TODO("Not yet implemented")
+        putLoadResult(DETAILS_URL_MALFORMED_EXTRA)
+        LocalBroadcastManager.getInstance(this).sendBroadcast(broadcastIntent)
     }
 
     private fun onErrorRequest(error: String) {
@@ -90,9 +91,11 @@ class DetailsService(name : String = "DetailsService") : IntentService(name) {
     }
 
 
-    private fun onSuccessResponse(id: Int?, original_title: String?, overview: String?, poster_path: String?,
-                                  backdrop_path: String?, release_date: String?, title: String?,
-                                  vote_average: Double?, runtime: Int?) {
+    private fun onSuccessResponse(
+            id: Int?, original_title: String?, overview: String?, poster_path: String?,
+            backdrop_path: String?, release_date: String?, title: String?,
+            vote_average: Double?, runtime: Int?,
+    ) {
         putLoadResult(DETAILS_RESPONSE_SUCCESS_EXTRA)
         broadcastIntent.putExtra(DETAILS_ID_MOVIE, id)
         broadcastIntent.putExtra(DETAILS_ORIGINAL_TITLE, original_title)
@@ -107,9 +110,9 @@ class DetailsService(name : String = "DetailsService") : IntentService(name) {
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
-        private fun getLines(reader: BufferedReader): String {
-            return reader.lines().collect(Collectors.joining("\n"))
-        }
+    private fun getLines(reader: BufferedReader): String {
+        return reader.lines().collect(Collectors.joining("\n"))
+    }
 
 
     private fun onEmptyData() {
@@ -124,8 +127,5 @@ class DetailsService(name : String = "DetailsService") : IntentService(name) {
 
     private fun putLoadResult(result: String) {
         broadcastIntent.putExtra(DETAILS_LOAD_RESULT_EXTRA, result)
-
     }
-
-
 }
