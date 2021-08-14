@@ -17,7 +17,7 @@ import java.io.IOException
 private const val SERVER_ERROR = "Ошибка сервера"
 private const val REQUEST_ERROR = "Ошибка запроса на сервер"
 private const val CORRUPTED_DATA = "Неполные данные"
-private val ERROR = "ERROR"
+
 
 class DetailsMovieViewModel(
     val detailsLiveData: MutableLiveData<AppState> = MutableLiveData(),
@@ -56,10 +56,7 @@ class DetailsMovieViewModel(
             serverResponse.release_date == null || serverResponse.title == null || serverResponse.vote_average == null ||
             serverResponse.runtime == null
         ) {
-            Log.e(ERROR, "check Response Error")
             AppState.Error(Throwable(CORRUPTED_DATA))
-
-
         } else {
             AppState.Success(convertDtoToModel(serverResponse))
         }

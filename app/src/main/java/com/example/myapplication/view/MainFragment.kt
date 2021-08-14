@@ -54,7 +54,7 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.mainFragmentRecyclerView.adapter = adapter
         val observer = Observer<AppState> { renderData(it) }
-        viewModel.getData().observe(viewLifecycleOwner, observer)
+        viewModel.liveDataToObserve.observe(viewLifecycleOwner, observer)
         viewModel.getMovieFromLocalSource()
     }
 

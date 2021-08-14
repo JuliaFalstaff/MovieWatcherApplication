@@ -17,12 +17,16 @@ import com.example.myapplication.model.AppState
 import com.example.myapplication.model.data.Movie
 import com.example.myapplication.model.dto.MovieDTO
 import com.example.myapplication.viewmodel.DetailsMovieViewModel
+import com.squareup.picasso.Picasso
 
 
 private const val API_KEY = "3d4eed70b3bf0c001506c22b79833ff1"
 private const val LANGUAGE = "en-US"
 private const val MAIN_LINK = "https://api.themoviedb.org/3/movie/"
-private val ERROR = "ERROR"
+private const val FILE_SIZE = "w500"
+private const val FILE_PATH = ""
+private const val BASE_URL = "https://image.tmdb.org/t/p/"
+
 
 
 class DetailedMovieFragment : Fragment() {
@@ -63,9 +67,7 @@ class DetailedMovieFragment : Fragment() {
         viewModel.detailsLiveData.observe(viewLifecycleOwner, Observer {
             renderData(it)
         })
-        Log.i(ERROR, "after render data")
         viewModel.getMovieFromRemoteSource(movieBundle.id)
-        Log.i(ERROR, "getMovieFromRemoteSource")
     }
 
 
@@ -86,8 +88,6 @@ class DetailedMovieFragment : Fragment() {
                 detailedLoadingLayout.visibility = View.GONE
                 detailedMovieView.showSnackBar(getString(R.string.error_appstate), getString(R.string.reload_appstate),
                         { viewModel.getMovieFromRemoteSource(movieBundle.id) })
-                Log.i(ERROR, "appstate success setmovie")
-
             }
         }
     }
@@ -100,8 +100,10 @@ class DetailedMovieFragment : Fragment() {
             textViewYearOfRelease.text = movie.release_date.toString()
             textViewPopularity.text = movie.vote_average.toString()
             textViewRuntime.text = movie.runtime.toString()
-            Log.i(ERROR, "setMove")
-
+            Picasso
+                .get()
+                .load(BASE_URL+ FILE_SIZE + movie.poster_path)
+                .into(imageViewPoster)
         }
 
         override fun onDestroyView() {

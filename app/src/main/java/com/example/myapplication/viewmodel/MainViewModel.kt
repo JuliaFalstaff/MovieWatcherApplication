@@ -10,10 +10,10 @@ import java.lang.Thread.sleep
 
 class MainViewModel(private  val repository: Repository = RepositoryImpl()): ViewModel() {
 
-    private val liveDataToObserve: MutableLiveData<AppState> = MutableLiveData()
+    val liveDataToObserve: MutableLiveData<AppState> = MutableLiveData()
     private val timer: Long = 1000
 
-    fun getData(): LiveData<AppState> = liveDataToObserve
+//    fun getData(): LiveData<AppState> = liveDataToObserve
 
     fun getMovieFromLocalSource() = getDataFromLocalSource()
 
