@@ -17,7 +17,7 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageViewBackgroundPoster"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="250dp"
             android:scaleType="centerCrop"
             android:adjustViewBounds="true"
             app:layout_constraintEnd_toEndOf="parent"
@@ -62,7 +62,7 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageViewPoster"
-            android:layout_width="200dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="12dp"
