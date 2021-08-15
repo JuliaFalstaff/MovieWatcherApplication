@@ -13,7 +13,8 @@ data class Movie(
         val overview: String? = "",
         val poster_path: String? = "",
         val vote_average: Double? = 0.0,
-        val runtime: Int? = 0
+        val runtime: Int? = 0,
+        val backdrop_path: String? = ""
 ) : Parcelable
 
 fun getMovieList() = listOf(
@@ -25,7 +26,8 @@ fun getMovieList() = listOf(
                 "Билл Мюррей и Скарлетт Йоханссон в фильме Софии Копполы",
                 R.drawable.poster_lost_in_translation.toString(),
                 7.5,
-                95
+                95,
+                "",
         ),
         Movie(
                 696,
@@ -35,7 +37,8 @@ fun getMovieList() = listOf(
                 "Желая бросить опостылевшую работу и привычный круг знакомств, телевизионный сценарист заводит роман с любовницей своего друга.\n",
                 R.drawable.manhattan.toString(),
                 7.5,
-                120
+                120,
+                "",
         ),
         Movie(
                 680,
@@ -46,7 +49,8 @@ fun getMovieList() = listOf(
                         "босса Марселласа Уоллеса.",
                 R.drawable.pulp_fiction.toString(),
                 8.4,
-                110
+                110,
+                "",
         ),
         Movie(
                 308,
@@ -57,7 +61,8 @@ fun getMovieList() = listOf(
                         "которые у него были 20 лет назад и посетить их, выяснив, какая из них родила ему сына.",
                 R.drawable.broken_flowers.toString(),
                 7.3,
-                95
+                95,
+                "",
         ),
         Movie(
                 1923,
@@ -68,7 +73,8 @@ fun getMovieList() = listOf(
                         "Постепенно зритель открывает для себя темную и страшную сторону жизни обитателей на первый взгляд тихого и мирного городка.",
                 R.drawable.twin_peaks.toString(),
                 7.4,
-                0
+                0,
+                "",
         ),
         Movie(
                 542178,
@@ -78,7 +84,8 @@ fun getMovieList() = listOf(
                 "Альманах о работе американской редакции во французской газете",
                 R.drawable.french_poster.toString(),
                 0.0,
-                120
+                120,
+                "",
         )
 )
 

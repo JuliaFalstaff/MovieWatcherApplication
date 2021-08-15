@@ -6,4 +6,5 @@
     <dimen name="margin_40_dp">40dp</dimen>
     <dimen name="margin_start_12">12dp</dimen>
     <dimen name="margin_4_dp">4dp</dimen>
+    <dimen name="text_size_description">15dp</dimen>
 </resources>
