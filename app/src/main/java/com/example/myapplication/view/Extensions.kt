@@ -20,7 +20,9 @@ fun convertDtoToModel(movieDTO: MovieDTO) : List<Movie> {
                     movieDTO.overview,
                     movieDTO.poster_path.toString(),
                     movieDTO.vote_average,
-                    movieDTO.runtime
+                    movieDTO.runtime,
+                    movieDTO.backdrop_path.toString()
+
             )
     )
 }

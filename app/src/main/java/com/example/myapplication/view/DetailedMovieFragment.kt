@@ -18,6 +18,7 @@ import com.example.myapplication.model.data.Movie
 import com.example.myapplication.model.dto.MovieDTO
 import com.example.myapplication.viewmodel.DetailsMovieViewModel
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_detailed_movie.*
 
 
 private const val API_KEY = "3d4eed70b3bf0c001506c22b79833ff1"
@@ -92,18 +93,25 @@ class DetailedMovieFragment : Fragment() {
         }
     }
 
-        private fun setMovie(movie: Movie) = with(binding) {
+        private fun setMovie(movie: Movie)  {
             val id = movieBundle.id
-            textViewOriginalTitle.text = movie.title.toString()
-            textViewDescription.text = movie.overview
-            textViewTitle.text = movie.title
-            textViewYearOfRelease.text = movie.release_date.toString()
-            textViewPopularity.text = movie.vote_average.toString()
-            textViewRuntime.text = movie.runtime.toString()
+            with(binding) {
+                textViewOriginalTitle.text = movie.title.toString()
+                textViewDescription.text = movie.overview
+                textViewTitle.text = movie.title
+                textViewYearOfRelease.text = movie.release_date.toString()
+                textViewPopularity.text = movie.vote_average.toString()
+                textViewRuntime.text = movie.runtime.toString()
+            }
             Picasso
                 .get()
                 .load(BASE_URL+ FILE_SIZE + movie.poster_path)
-                .into(imageViewPoster)
+                .into(binding.imageViewPoster)
+
+            Picasso
+                .get()
+                .load(BASE_URL + FILE_SIZE + movie.backdrop_path)
+                .into(binding.imageViewBackgroundPoster)
         }
 
         override fun onDestroyView() {
