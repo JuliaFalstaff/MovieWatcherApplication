@@ -1,5 +1,6 @@
 package com.example.myapplication.model.repository
 
+import com.example.myapplication.model.data.MovieList
 import com.example.myapplication.model.dto.MovieDTO
 import com.example.myapplication.model.dto.MovieListDTO
 import retrofit2.Call
@@ -21,9 +22,6 @@ interface MovieAPI {
         @Query("api_key") apiKey: String,
         @Query("language") language: String,
         @Query("page") page: Int,
-    ) : Call<MovieListDTO>
-
-
-
+    ) : Call<MovieList>
 }
 

@@ -30,9 +30,3 @@ fun convertDtoToModel(movieDTO: MovieDTO) : List<Movie> {
 }
 
 
-fun convertListDtoToModel(movieListDTO: MovieListDTO) : List<Movie> {
-    return listOf(
-        Movie(movieListDTO.page,
-        movieListDTO.movieList.toString())
-    )
-}

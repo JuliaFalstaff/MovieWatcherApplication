@@ -6,13 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import com.example.myapplication.R
 import com.example.myapplication.databinding.MainFragmentBinding
 import com.example.myapplication.model.AppState
 import com.example.myapplication.model.data.Movie
 import com.example.myapplication.viewmodel.MainViewModel
-import com.google.android.material.snackbar.Snackbar
 
 private const val API_KEY = "3d4eed70b3bf0c001506c22b79833ff1"
 
@@ -54,7 +52,7 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.mainFragmentRecyclerView.adapter = adapter
         viewModel.liveDataToObserve.observe(viewLifecycleOwner) { renderData(it) }
-        viewModel.getMovieListFromRemoteSource(1)
+        viewModel.getMoviesListFromServer(1)
     }
 
     private fun renderData(appState: AppState) {
@@ -69,7 +67,7 @@ class MainFragment : Fragment() {
             is AppState.Error -> {
                 binding.loadingLayout.visibility = View.GONE
                 binding.main.showSnackBar(getString(R.string.error_appstate), getString(R.string.reload_appstate),
-                { viewModel.getMovieListFromRemoteSource(1) })
+                { viewModel.getMoviesListFromServer(1) })
             }
         }
     }

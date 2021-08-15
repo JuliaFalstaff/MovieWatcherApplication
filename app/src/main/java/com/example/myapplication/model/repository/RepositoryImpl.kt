@@ -1,14 +1,13 @@
 package com.example.myapplication.model.repository
 
 import com.example.myapplication.model.data.Movie
-import com.example.myapplication.model.dto.MovieDTO
-import com.example.myapplication.model.dto.MovieListDTO
+import com.example.myapplication.model.data.MovieList
 import retrofit2.Callback
 
 
 class RepositoryImpl(private val remoteDataSource: RemoteDataSource) : Repository {
     override fun getMovieFromServer() = Movie()
-    override fun getMovieFromLocalStorage(page: Int?, callback: Callback<MovieListDTO>) {
+    override fun getMoviesListFromServer(page: Int, callback: Callback<MovieList>) {
         remoteDataSource.getMovieList(page, callback)
     }
 }
