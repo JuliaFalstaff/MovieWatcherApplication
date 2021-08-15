@@ -16,13 +16,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        if (savedInstanceState == null)  {
+        if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.container, MainFragment.newInstance())
                 .commitNow()
         }
         initView()
-     }
+    }
 
     private fun addFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.action_favourite -> {
                 addFragment(FavouriteMovieFragment())
                 return true

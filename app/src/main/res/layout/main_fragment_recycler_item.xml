@@ -44,17 +44,6 @@
                 android:textSize="@dimen/text_size" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/textViewOriginalTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/padding"
-            android:layout_weight="1"
-            android:text="@string/originalTitle"
-            android:textAlignment="textStart"
-            android:textSize="@dimen/text_size"
-            android:textStyle="bold" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">

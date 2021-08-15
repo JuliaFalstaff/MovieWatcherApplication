@@ -7,5 +7,4 @@ class DetailsMovieRepositoryImpl(private val remoteDataSource: RemoteDataSource)
     override fun getMovieDetailsFromServer(id: Int?, callback: Callback<MovieDTO>) {
         remoteDataSource.getMovieDetails(id, callback)
     }
-
 }

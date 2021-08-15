@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import com.example.myapplication.model.AppState
 import com.example.myapplication.model.data.Movie
 import com.example.myapplication.model.data.MovieList
-import com.example.myapplication.model.dto.MovieListDTO
 import com.example.myapplication.model.repository.RemoteDataSource
 import com.example.myapplication.model.repository.RepositoryImpl
 import retrofit2.Call
@@ -25,9 +24,9 @@ class MainViewModel() : ViewModel() {
         RepositoryImpl(RemoteDataSource())
     private val movieList: MutableList<Movie> = mutableListOf()
 
-    fun getMoviesListFromServer(page: Int?) {
+    fun getMoviesListFromServer(page: Int) {
         liveDataToObserve.value = AppState.Loading
-        repositoryImpl.getMoviesListFromServer(DEFAULT_PAGE, callback)
+        repositoryImpl.getMoviesListFromServer(page, callback)
     }
 
     private val callback = object : Callback<MovieList> {

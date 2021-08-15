@@ -6,6 +6,6 @@ import retrofit2.Callback
 interface DetailsMovieRepository {
     fun getMovieDetailsFromServer (
             id: Int?,
-            callback: retrofit2.Callback<MovieDTO>
+            callback: Callback<MovieDTO>
     )
 }
