@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:text="@string/originalTitle"
             android:textAlignment="textStart"
-            android:textSize="@dimen/text_size"
+            android:textSize="@dimen/text_size_detailed_info"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewTitle" />
@@ -79,7 +79,7 @@
             android:layout_height="37dp"
             android:layout_marginStart="40dp"
             android:text="@string/release_date_label"
-            android:textSize="@dimen/text_size"
+            android:textSize="@dimen/text_size_detailed_info"
             app:layout_constraintStart_toEndOf="@id/imageViewPoster"
             app:layout_constraintTop_toTopOf="@+id/imageViewPoster" />
 
@@ -90,7 +90,7 @@
             android:layout_marginEnd="8dp"
             android:text="@string/year_of_release"
             android:textAlignment="textStart"
-            android:textSize="@dimen/text_size"
+            android:textSize="@dimen/text_size_detailed_info"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.977"
             app:layout_constraintStart_toEndOf="@+id/textViewYearOfReleaseLabel"
@@ -103,20 +103,19 @@
             android:layout_width="31dp"
             android:layout_height="49dp"
             android:src="@drawable/ic_action_rated"
-            app:layout_constraintBottom_toBottomOf="@+id/textViewPopularity"
-            app:layout_constraintEnd_toStartOf="@+id/textViewPopularity"
-            app:layout_constraintHorizontal_bias="0.285"
+            android:adjustViewBounds="true"
+            android:paddingBottom="@dimen/margin_16_dp"
             app:layout_constraintStart_toStartOf="@+id/textViewRuntime"
-            app:layout_constraintTop_toTopOf="@+id/textViewPopularity"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toTopOf="@+id/textViewPopularity" />
 
         <TextView
             android:id="@+id/textViewRuntimeLabel"
             android:layout_width="150dp"
             android:layout_height="37dp"
+            android:layout_marginTop="8dp"
             android:text="@string/runtime_label"
             android:textAlignment="textStart"
-            android:textSize="@dimen/text_size"
+            android:textSize="@dimen/text_size_detailed_info"
             app:layout_constraintBottom_toBottomOf="@+id/textViewRuntime"
             app:layout_constraintStart_toStartOf="@+id/textViewGenreLabel"
             app:layout_constraintTop_toBottomOf="@+id/textViewGenreLabel" />
@@ -125,15 +124,12 @@
             android:id="@+id/textViewRuntime"
             android:layout_width="150dp"
             android:layout_height="43dp"
-            android:layout_marginTop="64dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
             android:text="@string/runtime"
             android:textAlignment="textStart"
-            android:textSize="@dimen/text_size"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            android:textSize="@dimen/text_size_detailed_info"
             app:layout_constraintStart_toStartOf="@+id/textViewGenre"
-            app:layout_constraintTop_toBottomOf="@+id/textViewYearOfRelease" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewGenre" />
 
         <TextView
             android:id="@+id/textViewGenreLabel"
@@ -142,7 +138,7 @@
             android:layout_marginTop="8dp"
             android:text="@string/genre_label"
             android:textAlignment="textStart"
-            android:textSize="@dimen/text_size"
+            android:textSize="@dimen/text_size_detailed_info"
             app:layout_constraintBottom_toTopOf="@+id/textViewRuntime"
             app:layout_constraintStart_toStartOf="@+id/textViewYearOfReleaseLabel"
             app:layout_constraintTop_toBottomOf="@+id/textViewYearOfReleaseLabel" />
@@ -154,9 +150,7 @@
             android:layout_marginTop="8dp"
             android:text="@string/genre"
             android:textAlignment="textStart"
-            android:textSize="@dimen/text_size"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            android:textSize="@dimen/text_size_detailed_info"
             app:layout_constraintStart_toStartOf="@+id/textViewYearOfRelease"
             app:layout_constraintTop_toBottomOf="@+id/textViewYearOfRelease"
             tools:ignore="MissingConstraints" />
@@ -167,9 +161,10 @@
             android:layout_height="50dp"
             android:paddingTop="@dimen/margin_4_dp"
             android:text="@string/popularity_label"
+            android:layout_marginTop="8dp"
             android:textAlignment="viewStart"
-            android:textSize="@dimen/text_size"
-            app:layout_constraintBottom_toBottomOf="@+id/textViewPopularity"
+            android:textSize="@dimen/text_size_detailed_info"
+            app:layout_constraintBottom_toBottomOf="@+id/ImageViewPopularity"
             app:layout_constraintStart_toStartOf="@+id/textViewRuntimeLabel"
             app:layout_constraintTop_toBottomOf="@+id/textViewRuntimeLabel" />
 
@@ -177,13 +172,12 @@
             android:id="@+id/textViewPopularity"
             android:layout_width="81dp"
             android:layout_height="59dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="4dp"
-            android:text="@string/popularity"
+            android:layout_marginTop="8dp"
             android:paddingTop="@dimen/margin_4_dp"
+            android:text="@string/popularity"
             android:textAlignment="viewStart"
-            android:textSize="@dimen/text_size"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="@dimen/text_size_detailed_info"
+            app:layout_constraintStart_toEndOf="@+id/ImageViewPopularity"
             app:layout_constraintTop_toBottomOf="@+id/textViewRuntime" />
 
         <FrameLayout
