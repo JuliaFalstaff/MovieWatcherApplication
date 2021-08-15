@@ -53,9 +53,8 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.mainFragmentRecyclerView.adapter = adapter
-        val observer = Observer<AppState> { renderData(it) }
-        viewModel.liveDataToObserve.observe(viewLifecycleOwner, observer)
-        viewModel.getMovieFromLocalSource()
+        viewModel.liveDataToObserve.observe(viewLifecycleOwner) { renderData(it) }
+        viewModel.getMovieListFromRemoteSource(1)
     }
 
     private fun renderData(appState: AppState) {
@@ -70,7 +69,7 @@ class MainFragment : Fragment() {
             is AppState.Error -> {
                 binding.loadingLayout.visibility = View.GONE
                 binding.main.showSnackBar(getString(R.string.error_appstate), getString(R.string.reload_appstate),
-                { viewModel.getMovieFromLocalSource() })
+                { viewModel.getMovieListFromRemoteSource(1) })
             }
         }
     }

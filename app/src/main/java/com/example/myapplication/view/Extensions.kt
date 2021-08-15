@@ -2,7 +2,9 @@ package com.example.myapplication.view
 
 import android.view.View
 import com.example.myapplication.model.data.Movie
+import com.example.myapplication.model.data.MovieList
 import com.example.myapplication.model.dto.MovieDTO
+import com.example.myapplication.model.dto.MovieListDTO
 import com.google.android.material.snackbar.Snackbar
 
 fun View.showSnackBar ( text: String, actionText: String, action: (View) -> Unit, length: Int = Snackbar.LENGTH_INDEFINITE) {
@@ -24,5 +26,13 @@ fun convertDtoToModel(movieDTO: MovieDTO) : List<Movie> {
                     movieDTO.backdrop_path.toString()
 
             )
+    )
+}
+
+
+fun convertListDtoToModel(movieListDTO: MovieListDTO) : List<Movie> {
+    return listOf(
+        Movie(movieListDTO.page,
+        movieListDTO.movieList.toString())
     )
 }

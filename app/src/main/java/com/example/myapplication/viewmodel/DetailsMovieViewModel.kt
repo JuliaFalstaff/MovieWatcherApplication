@@ -1,6 +1,5 @@
 package com.example.myapplication.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.myapplication.model.AppState
