@@ -15,4 +15,8 @@
     <string name="popularity">popularity</string>
     <string name="runtime">Runtime</string>
     <string name="originalTitle">Original Title</string>
+    <string name="release_date_label">Date: </string>
+    <string name="runtime_label">"Runtime:"</string>
+    <string name="genre_label">"Genre: "</string>
+    <string name="popularity_label">Popularity:</string>
 </resources>

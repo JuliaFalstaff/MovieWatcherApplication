@@ -6,15 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import com.example.myapplication.R
 import com.example.myapplication.databinding.MainFragmentBinding
 import com.example.myapplication.model.AppState
 import com.example.myapplication.model.data.Movie
 import com.example.myapplication.viewmodel.MainViewModel
-import com.google.android.material.snackbar.Snackbar
 
-private const val API_KEY = "3d4eed70b3bf0c001506c22b79833ff1"
+private const val FIRST_PAGE = 1
 
 class MainFragment : Fragment() {
 
@@ -31,17 +29,19 @@ class MainFragment : Fragment() {
         override fun onItemViewClick(movie: Movie) {
             activity?.supportFragmentManager?.apply {
                 beginTransaction()
-                        .add(R.id.container, DetailedMovieFragment.newInstance(Bundle().apply {
-                            putParcelable(DetailedMovieFragment.BUNDLE_EXTRA, movie)
-                        }))
-                        .addToBackStack("")
-                        .commitAllowingStateLoss()
+                    .add(R.id.container, DetailedMovieFragment.newInstance(Bundle().apply {
+                        putParcelable(DetailedMovieFragment.BUNDLE_EXTRA, movie)
+                    }))
+                    .addToBackStack("")
+                    .commitAllowingStateLoss()
             }
         }
     })
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         _binding = MainFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -53,9 +53,8 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.mainFragmentRecyclerView.adapter = adapter
-        val observer = Observer<AppState> { renderData(it) }
-        viewModel.getData().observe(viewLifecycleOwner, observer)
-        viewModel.getMovieFromLocalSource()
+        viewModel.liveDataToObserve.observe(viewLifecycleOwner) { renderData(it) }
+        viewModel.getMoviesListFromServer(FIRST_PAGE)
     }
 
     private fun renderData(appState: AppState) {
@@ -69,17 +68,18 @@ class MainFragment : Fragment() {
             }
             is AppState.Error -> {
                 binding.loadingLayout.visibility = View.GONE
-                binding.main.showSnackBar(getString(R.string.error_appstate), getString(R.string.reload_appstate),
-                { viewModel.getMovieFromLocalSource() })
+                binding.main.showSnackBar(getString(R.string.error_appstate),
+                    getString(R.string.reload_appstate),
+                    { viewModel.getMoviesListFromServer(1) })
             }
         }
     }
 
-//    override fun onDestroy() {
-//        adapter.removeListener()
-//        _binding = null
-//        super.onDestroy()
-//    }
+    override fun onDestroy() {
+        adapter.removeListener()
+        _binding = null
+        super.onDestroy()
+    }
 
     interface OnItemViewClickListener {
         fun onItemViewClick(movie: Movie)
