@@ -52,6 +52,7 @@ class MainFragmentAdapter(private var onItemViewClickListener: MainFragment.OnIt
             textViewTitle.text = movie.title
             textViewYearOfRelease.text = movie.release_date.toString()
             imageViewPoster.setImageResource(R.drawable.ic_launcher_background)
+            textViewGenre.text = movie.genres.toString()
             Picasso
                 .get()
                 .load(BASE_URL + movie.poster_path)
