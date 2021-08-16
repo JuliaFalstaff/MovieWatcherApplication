@@ -96,6 +96,7 @@ class DetailedMovieFragment : Fragment() {
             textViewYearOfRelease.text = movie.release_date.toString()
             textViewPopularity.text = movie.vote_average.toString()
             textViewRuntime.text = movie.runtime.toString()
+            textViewGenre.text = movie.genres.toString()
         }
         Picasso
             .get()

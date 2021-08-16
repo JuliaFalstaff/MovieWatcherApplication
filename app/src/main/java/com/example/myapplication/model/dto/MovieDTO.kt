@@ -1,5 +1,7 @@
 package com.example.myapplication.model.dto
 
+import com.example.filmapp.model.entites.Genre
+
 data class MovieDTO(
         val id: Int?,
         val original_title: String?,
@@ -9,5 +11,6 @@ data class MovieDTO(
         val release_date: String?,
         val title: String?,
         val vote_average: Double?,
-        val runtime: Int?
+        val runtime: Int?,
+        val genres: ArrayList<Genre>
 )
