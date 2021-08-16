@@ -70,7 +70,7 @@ class DetailedMovieFragment : Fragment() {
             is AppState.Success -> {
                 detailedMovieView.visibility = View.VISIBLE
                 detailedLoadingLayout.visibility = View.GONE
-                setMovie(appState.movieData[0])
+                setMovie(appState.movieData.first())
 
             }
             is AppState.Loading -> {
