@@ -15,7 +15,7 @@ data class Movie(
         val vote_average: Double? = 0.0,
         val runtime: Int? = 0,
         val backdrop_path: String? = "",
-        val adult: Boolean? = false
+        val adult: Boolean = false
 ) : Parcelable
 
 

@@ -7,18 +7,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.myapplication.databinding.FragmentSettingBinding
+import kotlin.properties.Delegates
 
 
-
-class SettingsFragment: Fragment() {
+class SettingsFragment : Fragment() {
 
     private lateinit var binding: FragmentSettingBinding
-    private var isAdultMovie: Boolean = false
+    private var isAdult: Boolean = false
+
 
     companion object {
         const val IS_ADULT_SETTING = "ADULT_SETTING"
-        const val BUNDLE_EXTRA_SETTINGS = "settings"
-        fun newInstance() = SettingsFragment
+
+        fun newInstance(bundle: Bundle): SettingsFragment {
+            val fragment = SettingsFragment()
+            fragment.arguments = bundle
+            return fragment
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,30 +32,38 @@ class SettingsFragment: Fragment() {
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+            savedInstanceState: Bundle?,
     ): View? {
         binding = FragmentSettingBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(binding) {
         super.onViewCreated(view, savedInstanceState)
-        binding.buttonApplySettings.setOnClickListener {
-            saveOptions()
-        }
-        readSettings()
-    }
-
-    private fun readSettings() {
         activity?.let {
-            it.getPreferences(Context.MODE_PRIVATE).getBoolean(IS_ADULT_SETTING,false)
+            switchAdult.isChecked = it.getPreferences(Context.MODE_PRIVATE)
+                    .getBoolean(IS_ADULT_SETTING, false)
+        }
+
+
+        switchAdult.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                isAdult = true
+                activity?.let {
+                    it.getPreferences(Context.MODE_PRIVATE)
+                            .edit()
+                            .putBoolean(IS_ADULT_SETTING, isAdult)
+                            .apply()
+                }
+            } else {
+                isAdult = false
+                activity?.let {
+                    it.getPreferences(Context.MODE_PRIVATE)
+                            .edit()
+                            .putBoolean(IS_ADULT_SETTING, isAdult)
+                            .apply()
+                }
+            }
         }
     }
-
-    private fun saveOptions() {
-        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
-        sharedPref?.edit()?.putBoolean(IS_ADULT_SETTING, isAdultMovie)?.apply()
-    }
-
-
 }

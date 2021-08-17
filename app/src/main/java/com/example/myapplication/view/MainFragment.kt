@@ -11,11 +11,10 @@ import com.example.myapplication.R
 import com.example.myapplication.databinding.MainFragmentBinding
 import com.example.myapplication.model.AppState
 import com.example.myapplication.model.data.Movie
+import com.example.myapplication.view.SettingsFragment.Companion.IS_ADULT_SETTING
 import com.example.myapplication.viewmodel.MainViewModel
 
 private const val FIRST_PAGE = 1
-private const val IS_ADULT_SETTING = "ADULT_SETTING"
-
 private var isAdultMovie: Boolean = false
 
 class MainFragment : Fragment() {
@@ -55,17 +54,26 @@ class MainFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        readSettings()
         binding.mainFragmentRecyclerView.adapter = adapter
         viewModel.liveDataToObserve.observe(viewLifecycleOwner) { renderData(it) }
         viewModel.getMoviesListFromServer(FIRST_PAGE)
 
     }
 
+
+    private fun readSettings() {
+        activity?.let {
+            isAdultMovie = it.getPreferences(Context.MODE_PRIVATE).getBoolean(IS_ADULT_SETTING, false)
+        }
+    }
+
     private fun renderData(appState: AppState) {
         when (appState) {
             is AppState.Success -> {
                 binding.loadingLayout.visibility = View.GONE
-                adapter.setMovie(appState.movieData)
+                adapter.setMovie(checkIsAdultSettings(appState.movieData as MutableList<Movie>))
             }
             is AppState.Loading -> {
                 binding.loadingLayout.visibility = View.VISIBLE
@@ -77,6 +85,17 @@ class MainFragment : Fragment() {
                     { viewModel.getMoviesListFromServer(1) })
             }
         }
+    }
+
+    private fun checkIsAdultSettings(movieData: MutableList<Movie>) : MutableList<Movie> {
+        if (!isAdultMovie) {
+                for(i in 0 until movieData.size){
+                    if(movieData[i].adult){
+                        movieData.removeAt(i)
+                    }
+                }
+            }
+        return movieData
     }
 
     override fun onDestroy() {
