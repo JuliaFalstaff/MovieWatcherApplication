@@ -1,5 +1,6 @@
 package com.example.myapplication.view
 
+import android.content.Context
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -57,6 +58,10 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.action_main -> {
                 addFragment(MainFragment())
+                return true
+            }
+            R.id.action_settings -> {
+                addFragment(SettingsFragment())
                 return true
             }
         }

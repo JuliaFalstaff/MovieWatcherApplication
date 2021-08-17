@@ -1,5 +1,6 @@
 package com.example.myapplication.view
 
+import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,6 +14,9 @@ import com.example.myapplication.model.data.Movie
 import com.example.myapplication.viewmodel.MainViewModel
 
 private const val FIRST_PAGE = 1
+private const val IS_ADULT_SETTING = "ADULT_SETTING"
+
+private var isAdultMovie: Boolean = false
 
 class MainFragment : Fragment() {
 
@@ -23,7 +27,6 @@ class MainFragment : Fragment() {
     private lateinit var viewModel: MainViewModel
     private var _binding: MainFragmentBinding? = null
     private val binding get() = _binding!!
-    private lateinit var movieBundle: Movie
 
     private val adapter = MainFragmentAdapter(object : OnItemViewClickListener {
         override fun onItemViewClick(movie: Movie) {
@@ -55,6 +58,7 @@ class MainFragment : Fragment() {
         binding.mainFragmentRecyclerView.adapter = adapter
         viewModel.liveDataToObserve.observe(viewLifecycleOwner) { renderData(it) }
         viewModel.getMoviesListFromServer(FIRST_PAGE)
+
     }
 
     private fun renderData(appState: AppState) {

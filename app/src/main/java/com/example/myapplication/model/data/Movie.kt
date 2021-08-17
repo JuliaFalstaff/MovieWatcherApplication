@@ -14,8 +14,11 @@ data class Movie(
         val poster_path: String? = "",
         val vote_average: Double? = 0.0,
         val runtime: Int? = 0,
-        val backdrop_path: String? = ""
+        val backdrop_path: String? = "",
+        val adult: Boolean? = false
 ) : Parcelable
+
+
 
 fun getMovieList() = listOf(
         Movie(
