@@ -1,6 +1,8 @@
 package com.example.myapplication.model.repository
 
+import com.example.filmapp.model.entites.GenresList
 import com.example.myapplication.model.data.MovieList
+import com.example.myapplication.model.dto.GenresDTO
 import com.example.myapplication.model.dto.MovieDTO
 import com.google.gson.GsonBuilder
 import retrofit2.Callback
@@ -28,5 +30,10 @@ class RemoteDataSource {
 
     fun getMovieList(page: Int, callback: Callback<MovieList>) {
         movieAPI.getMovieList(API_KEY, LANGUAGE, page).enqueue(callback)
+    }
+
+
+    fun getGenresList(callback: Callback<GenresList>) {
+        movieAPI.getGenres(API_KEY, LANGUAGE).enqueue(callback)
     }
 }
