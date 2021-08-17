@@ -3,6 +3,7 @@ package com.example.myapplication.view
 import android.content.Context
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,12 +16,13 @@ import com.example.myapplication.view.SettingsFragment.Companion.IS_ADULT_SETTIN
 import com.example.myapplication.viewmodel.MainViewModel
 
 private const val FIRST_PAGE = 1
-private var isAdultMovie: Boolean = false
+
 
 class MainFragment : Fragment() {
 
     companion object {
         fun newInstance() = MainFragment()
+        var isAdultMovie: Boolean = false
     }
 
     private lateinit var viewModel: MainViewModel
@@ -56,24 +58,24 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         readSettings()
+        Log.d("Movie", "on view created")
         binding.mainFragmentRecyclerView.adapter = adapter
         viewModel.liveDataToObserve.observe(viewLifecycleOwner) { renderData(it) }
         viewModel.getMoviesListFromServer(FIRST_PAGE)
-
     }
-
 
     private fun readSettings() {
         activity?.let {
-            isAdultMovie = it.getPreferences(Context.MODE_PRIVATE).getBoolean(IS_ADULT_SETTING, false)
+          isAdultMovie = (it.getPreferences(Context.MODE_PRIVATE).getBoolean(IS_ADULT_SETTING, false))
         }
+        Log.d("Movie", "readsettings")
     }
 
     private fun renderData(appState: AppState) {
         when (appState) {
             is AppState.Success -> {
                 binding.loadingLayout.visibility = View.GONE
-                adapter.setMovie(checkIsAdultSettings(appState.movieData as MutableList<Movie>))
+                adapter.setMovie(appState.movieData)
             }
             is AppState.Loading -> {
                 binding.loadingLayout.visibility = View.VISIBLE
@@ -85,17 +87,6 @@ class MainFragment : Fragment() {
                     { viewModel.getMoviesListFromServer(1) })
             }
         }
-    }
-
-    private fun checkIsAdultSettings(movieData: MutableList<Movie>) : MutableList<Movie> {
-        if (!isAdultMovie) {
-                for(i in 0 until movieData.size){
-                    if(movieData[i].adult){
-                        movieData.removeAt(i)
-                    }
-                }
-            }
-        return movieData
     }
 
     override fun onDestroy() {

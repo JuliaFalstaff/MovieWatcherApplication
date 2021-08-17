@@ -18,8 +18,8 @@ fun View.showSnackBar(
         .show()
 }
 
-fun convertDtoToModel(movieDTO: MovieDTO): List<Movie> {
-    return listOf(
+fun convertDtoToModel(movieDTO: MovieDTO): MutableList<Movie> {
+    return mutableListOf(
         Movie(
             movieDTO?.id,
             movieDTO.original_title,
