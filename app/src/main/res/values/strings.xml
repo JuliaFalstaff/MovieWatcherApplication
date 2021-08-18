@@ -27,4 +27,7 @@
     <string name="off">Выключить взрослый контент</string>
     <string name="on">Включать взрослый контент</string>
     <string name="menu_settings">Settings</string>
+    <string name="menu_history">History</string>
+    <string name="error">Error</string>
+    <string name="reload">Reload</string>
 </resources>

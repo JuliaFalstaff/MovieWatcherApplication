@@ -28,4 +28,12 @@
         android:orderInCategory="5"
         android:title="@string/menu_settings"
         app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/action_history"
+        android:icon="@drawable/ic_history_foreground"
+        android:orderInCategory="5"
+        android:title="@string/menu_history"
+        app:showAsAction="ifRoom"/>
+
 </menu>

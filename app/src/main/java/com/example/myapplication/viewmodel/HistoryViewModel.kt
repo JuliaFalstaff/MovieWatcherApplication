@@ -14,10 +14,8 @@ class HistoryViewModel(
 ) : ViewModel() {
 
 
-     fun getAllHistory() {
-         historyLiveData.value = AppState.Loading
-         historyLiveData.value = AppState.Success(historyRepository.getAllHistory() )
-     }
-
-
+    fun getAllHistory() {
+        historyLiveData.value = AppState.Loading
+        historyLiveData.value = AppState.Success(historyRepository.getAllHistory())
+    }
 }

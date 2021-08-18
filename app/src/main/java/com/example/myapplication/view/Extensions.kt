@@ -48,7 +48,6 @@ fun convertHistoryEntityToMovie(entityList: List<HistoryEntity>): MutableList<Mo
 
 fun convertMovieToEntity(movie: Movie): HistoryEntity {
     return HistoryEntity(0, movie.id, movie.title, movie.poster_path, movie.runtime)
-
 }
 
 

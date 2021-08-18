@@ -64,6 +64,10 @@ class MainActivity : AppCompatActivity() {
                 addFragment(SettingsFragment())
                 return true
             }
+            R.id.action_history -> {
+                addFragment(HistoryFragment())
+                return true
+            }
         }
         return super.onOptionsItemSelected(item)
     }
