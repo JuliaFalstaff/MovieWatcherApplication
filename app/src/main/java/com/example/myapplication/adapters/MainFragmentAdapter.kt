@@ -1,4 +1,4 @@
-package com.example.myapplication.view
+package com.example.myapplication.adapters
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.databinding.MainFragmentRecyclerItemBinding
 import com.example.myapplication.model.data.Movie
+import com.example.myapplication.view.MainFragment
 import com.example.myapplication.view.MainFragment.Companion.isAdultMovie
 import com.squareup.picasso.Picasso
 

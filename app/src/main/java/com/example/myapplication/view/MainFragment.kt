@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.myapplication.R
+import com.example.myapplication.adapters.MainFragmentAdapter
 import com.example.myapplication.databinding.MainFragmentBinding
 import com.example.myapplication.model.AppState
 import com.example.myapplication.model.data.Movie
