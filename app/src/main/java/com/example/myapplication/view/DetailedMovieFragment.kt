@@ -96,6 +96,7 @@ class DetailedMovieFragment : Fragment() {
             textViewYearOfRelease.text = movie.release_date.toString()
             textViewPopularity.text = movie.vote_average.toString()
             textViewRuntime.text = movie.runtime.toString()
+            saveMovie(movieBundle)
         }
         Picasso
             .get()
@@ -106,6 +107,16 @@ class DetailedMovieFragment : Fragment() {
             .get()
             .load(BASE_URL + FILE_SIZE + movie.backdrop_path)
             .into(binding.imageViewBackgroundPoster)
+
+
+    }
+
+    private fun saveMovie(movie: Movie) {
+        viewModel.saveMovieToDB(
+            Movie(movieBundle.id, movieBundle.original_title, movieBundle.title, movieBundle.release_date,
+                movieBundle.overview, movieBundle.poster_path, movieBundle.vote_average, movieBundle.runtime,
+                movieBundle.backdrop_path, movieBundle.adult)
+        )
     }
 
     override fun onDestroyView() {

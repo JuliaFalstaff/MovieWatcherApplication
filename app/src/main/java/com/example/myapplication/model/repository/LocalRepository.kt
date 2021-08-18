@@ -4,6 +4,6 @@ import com.example.myapplication.model.data.Movie
 
 interface LocalRepository {
 
-    fun getAllHistory(): List<Movie>
+    fun getAllHistory(): MutableList<Movie>
     fun saveEntity(movie: Movie)
 }

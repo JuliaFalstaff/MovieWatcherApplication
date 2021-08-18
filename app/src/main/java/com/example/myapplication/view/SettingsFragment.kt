@@ -46,7 +46,7 @@ class SettingsFragment : Fragment() {
         }
 
 
-        switchAdult.setOnCheckedChangeListener { buttonView, isChecked ->
+        switchAdult.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 isAdult = true
                 activity?.let {

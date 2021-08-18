@@ -22,7 +22,7 @@ fun View.showSnackBar(
 fun convertDtoToModel(movieDTO: MovieDTO): MutableList<Movie> {
     return mutableListOf(
         Movie(
-            movieDTO?.id,
+            movieDTO.id,
             movieDTO.original_title,
             movieDTO.title,
             movieDTO.release_date,
@@ -36,14 +36,18 @@ fun convertDtoToModel(movieDTO: MovieDTO): MutableList<Movie> {
 }
 
 
-    fun convertHistoryEntityToMovie(entityList: List<HistoryEntity>): List<Movie> {
-        return entityList.map {
-            Movie(0, "", it.title,"", "", it.poster_path, it.vote_average, it.runtime)
-        }
-    }
+fun convertHistoryEntityToMovie(entityList: List<HistoryEntity>): MutableList<Movie> {
+    return entityList.map {
+        Movie(
+            id = it.id.toInt(),
+            title = it.title,
+            poster_path = it.poster_path,
+            runtime = it.runtime)
+    }.toMutableList()
+}
 
-    fun convertMovieToEntity(movie: Movie): HistoryEntity {
-        return HistoryEntity(0, 0,movie.title, movie.poster_path, movie.vote_average, movie.runtime)
+fun convertMovieToEntity(movie: Movie): HistoryEntity {
+    return HistoryEntity(0, movie.id, movie.title, movie.poster_path, movie.runtime)
 
 }
 
