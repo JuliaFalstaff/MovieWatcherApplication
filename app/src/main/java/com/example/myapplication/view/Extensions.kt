@@ -6,6 +6,7 @@ import com.example.myapplication.model.data.MovieList
 import com.example.myapplication.model.dto.MovieDTO
 import com.example.myapplication.model.dto.MovieListDTO
 import com.example.myapplication.room.HistoryEntity
+import com.example.myapplication.room.NoteEntity
 import com.google.android.material.snackbar.Snackbar
 
 fun View.showSnackBar(
@@ -39,7 +40,7 @@ fun convertDtoToModel(movieDTO: MovieDTO): MutableList<Movie> {
 fun convertHistoryEntityToMovie(entityList: List<HistoryEntity>): MutableList<Movie> {
     return entityList.map {
         Movie(
-            id = it.id.toInt(),
+            id = it.film_Id?.toInt(),
             title = it.title,
             poster_path = it.poster_path,
             runtime = it.runtime)
@@ -49,5 +50,23 @@ fun convertHistoryEntityToMovie(entityList: List<HistoryEntity>): MutableList<Mo
 fun convertMovieToEntity(movie: Movie): HistoryEntity {
     return HistoryEntity(0, movie.id, movie.title, movie.poster_path, movie.runtime)
 }
+
+fun convertMovieToNoteEntity(movieId: Int, title: String, backdrop_path: String, note: String): NoteEntity {
+    return NoteEntity(0, movieId,title, backdrop_path, note)
+}
+
+
+fun convertNoteEntityToMovie(entityList: List<NoteEntity>) : MutableList<Movie> {
+    return entityList.map {
+        Movie(
+                id = it.movieId,
+                title = it.title,
+                backdrop_path = it.backdrop_path.toString(),
+                note = it.note
+        )
+    }.toMutableList()
+}
+
+
 
 

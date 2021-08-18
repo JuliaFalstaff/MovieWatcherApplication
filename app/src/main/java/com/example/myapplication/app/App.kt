@@ -4,6 +4,8 @@ import android.app.Application
 import androidx.room.Room
 import com.example.myapplication.room.HistoryDao
 import com.example.myapplication.room.HistoryDataBase
+import com.example.myapplication.room.NoteDao
+import com.example.myapplication.room.NoteDataBase
 
 
 class App : Application() {
@@ -16,15 +18,17 @@ class App : Application() {
     companion object {
 
         private var appInstance: App? = null
-        private var db: HistoryDataBase? = null
-        private const val DB_NAME = "History.db"
+        private var historyDataBase: HistoryDataBase? = null
+        private var noteDataBase: NoteDataBase? = null
+
+        private const val DB_NAME = "DataBase.db"
 
         fun getHistoryDao(): HistoryDao {
-            if (db == null) {
+            if (historyDataBase == null) {
                 synchronized(HistoryDataBase::class.java) {
-                    if (db == null) {
+                    if (historyDataBase == null) {
                         if (appInstance == null) throw IllegalStateException("Application is null while creating DataBase")
-                        db = Room.databaseBuilder(
+                        historyDataBase = Room.databaseBuilder(
                             appInstance!!.applicationContext,
                             HistoryDataBase::class.java,
                             DB_NAME)
@@ -33,8 +37,26 @@ class App : Application() {
                     }
                 }
             }
+            return historyDataBase!!.historyDao()
+        }
 
-            return db!!.historyDao()
+
+        fun getNoteDao(): NoteDao {
+            if (noteDataBase == null) {
+                synchronized(HistoryDataBase::class.java) {
+                    if (noteDataBase == null) {
+                        if (appInstance == null) throw IllegalStateException("Application is null while creating DataBase")
+                        noteDataBase = Room.databaseBuilder(
+                                appInstance!!.applicationContext,
+                                NoteDataBase::class.java,
+                                DB_NAME)
+                                .allowMainThreadQueries()
+                                .build()
+                    }
+                }
+            }
+
+            return noteDataBase!!.noteDao()
         }
     }
 }

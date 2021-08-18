@@ -3,6 +3,7 @@ package com.example.myapplication.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.myapplication.app.App.Companion.getHistoryDao
+import com.example.myapplication.app.App.Companion.getNoteDao
 import com.example.myapplication.model.AppState
 import com.example.myapplication.model.data.Movie
 import com.example.myapplication.model.dto.MovieDTO
@@ -20,7 +21,7 @@ private const val CORRUPTED_DATA = "Неполные данные"
 class DetailsMovieViewModel(
     val detailsLiveData: MutableLiveData<AppState> = MutableLiveData(),
     private val detailsMovieRepositoryImpl: DetailsMovieRepository = DetailsMovieRepositoryImpl(RemoteDataSource()),
-    private val historyRepository: LocalRepository = LocalRepositoryImpl(getHistoryDao())
+    private val historyRepository: LocalRepository = LocalRepositoryImpl(getHistoryDao(), getNoteDao())
 ) : ViewModel() {
 
     fun getMovieFromRemoteSource(id: Int?) {
