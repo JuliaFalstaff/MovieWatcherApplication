@@ -7,21 +7,19 @@ import com.example.myapplication.model.AppState
 import com.example.myapplication.model.data.Movie
 import com.example.myapplication.model.repository.LocalRepository
 import com.example.myapplication.model.repository.LocalRepositoryImpl
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 
 class NoteViewModel(
         val noteLiveData: MutableLiveData<AppState> = MutableLiveData(),
-        private val noteRepository: LocalRepository = LocalRepositoryImpl(App.getHistoryDao(), App.getNoteDao())
+        private val historyRepository: LocalRepository = LocalRepositoryImpl(App.getHistoryDao(), App.getNoteDao())
 ): ViewModel() {
 
     fun getNoteByMovieId(movieId: Int){
         noteLiveData.value = AppState.Loading
-        noteLiveData.value = AppState.Success(noteRepository.getNoteByMovieId(movieId) as MutableList<Movie>)
+        noteLiveData.value = AppState.Success(historyRepository.getNoteByMovieId(movieId) as MutableList<Movie>)
     }
 
     fun getAllNotes() {
         noteLiveData.value = AppState.Loading
-        noteLiveData.value = AppState.Success(noteRepository.getAllNotes())
+        noteLiveData.value = AppState.Success(historyRepository.getAllNotes())
     }
 }

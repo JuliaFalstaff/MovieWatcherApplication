@@ -10,6 +10,6 @@ interface LocalRepository {
 
     fun getAllNotes(): MutableList<Movie>
     fun saveNoteEntity(movieId: Int, title: String, backdrop_path: String, note: String)
-    fun getNoteByMovieId(movieId: Int) : List<NoteEntity>
+    fun getNoteByMovieId(movieId: Int) : List<Movie>
 
 }
