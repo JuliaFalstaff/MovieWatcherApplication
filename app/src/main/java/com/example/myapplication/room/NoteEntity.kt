@@ -6,9 +6,7 @@ import androidx.room.PrimaryKey
 @Entity
 data class NoteEntity(
     @PrimaryKey(autoGenerate = true)
-    val idNote: Long,
+    val id: Long,
     val movieId: Int?,
-    val title: String?,
-    val backdrop_path: String?,
     val note: String?
     )

@@ -10,7 +10,10 @@ interface NoteDao {
     fun allNotes(): List<NoteEntity>
 
     @Query("SELECT * FROM NoteEntity WHERE movieId LIKE :movieId")
-    fun getNoteByMovieId(movieId: Int): List<NoteEntity>
+    fun getNoteByMovieId(movieId: Int): NoteEntity
+
+    @Query("SELECT 'id' FROM NoteEntity WHERE id LIKE :id")
+    fun getId(id: Int): Int
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(entity: NoteEntity)
@@ -21,3 +24,4 @@ interface NoteDao {
     @Delete
     fun delete(entity: NoteEntity)
 }
+

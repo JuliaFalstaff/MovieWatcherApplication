@@ -64,4 +64,8 @@ class DetailsMovieViewModel(
     fun saveMovieToDB(movie: Movie) {
         historyRepository.saveEntity(movie)
     }
+
+    fun saveNoteToDB(movie: Movie) {
+        historyRepository.saveNoteEntity(0,movie.id, movie.note)
+    }
 }

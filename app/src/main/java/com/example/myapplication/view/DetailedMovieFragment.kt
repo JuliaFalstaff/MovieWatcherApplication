@@ -96,7 +96,13 @@ class DetailedMovieFragment : Fragment() {
             textViewYearOfRelease.text = movie.release_date.toString()
             textViewPopularity.text = movie.vote_average.toString()
             textViewRuntime.text = movie.runtime.toString()
+            editTextNote.setText(movie.note.toString())
             saveMovie(movie)
+
+            buttonSaveNote.setOnClickListener {
+                saveNoteToDB(movie)
+            }
+
         }
         Picasso
             .get()
@@ -117,6 +123,10 @@ class DetailedMovieFragment : Fragment() {
                 movie.overview, movie.poster_path, movie.vote_average, movie.runtime,
                 movie.backdrop_path, movie.adult)
         )
+    }
+
+    private fun saveNoteToDB(movie: Movie) {
+        viewModel.saveNoteToDB(movie)
     }
 
     override fun onDestroyView() {

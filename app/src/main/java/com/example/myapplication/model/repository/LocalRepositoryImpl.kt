@@ -2,13 +2,12 @@ package com.example.myapplication.model.repository
 
 import com.example.myapplication.model.data.Movie
 import com.example.myapplication.room.HistoryDao
-import com.example.myapplication.room.HistoryEntity
 import com.example.myapplication.room.NoteDao
 import com.example.myapplication.room.NoteEntity
 import com.example.myapplication.view.convertHistoryEntityToMovie
 import com.example.myapplication.view.convertMovieToEntity
 import com.example.myapplication.view.convertMovieToNoteEntity
-import com.example.myapplication.view.convertNoteEntityToMovie
+
 
 
 class LocalRepositoryImpl(
@@ -24,15 +23,25 @@ class LocalRepositoryImpl(
         return localDataSource.insert(convertMovieToEntity(movie))
     }
 
-    override fun getAllNotes(): MutableList<Movie> {
-        return convertNoteEntityToMovie(localDataSourceNote.allNotes())
+    override fun getAllNotes(): List<NoteEntity> {
+        return localDataSourceNote.allNotes()
     }
 
-    override fun saveNoteEntity(movieId: Int, title: String, backdrop_path: String, note: String) {
-        return localDataSourceNote.insert(convertMovieToNoteEntity(movieId, title, backdrop_path, note))
+    override fun saveNoteEntity(id: Long, movieId: Int?, note: String?) {
+        localDataSourceNote.insert(convertMovieToNoteEntity(0,movieId,note))
     }
 
-    override fun getNoteByMovieId(movieId: Int) : List<NoteEntity> {
-        return localDataSourceNote.getNoteByMovieId(movieId)
+
+    override fun getNoteByMovieId(movieId: Int): Int {
+        return localDataSourceNote.getId(movieId)
     }
+
+
+
+
+
+
+
+
 }
+

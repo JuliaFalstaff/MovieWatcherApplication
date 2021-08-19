@@ -20,6 +20,6 @@ class NoteViewModel(
 
     fun getAllNotes() {
         noteLiveData.value = AppState.Loading
-        noteLiveData.value = AppState.Success(historyRepository.getAllNotes())
+        noteLiveData.value = AppState.SuccessMovieNotes(historyRepository.getAllNotes())
     }
 }
