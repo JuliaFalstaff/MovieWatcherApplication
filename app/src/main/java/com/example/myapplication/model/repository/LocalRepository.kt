@@ -11,6 +11,7 @@ interface LocalRepository {
 
     fun getAllNotes(): List<NoteEntity>
     fun saveNoteEntity(id: Long, movieId: Int?, note: String?)
+    fun saveNoteMovieEntity(movie: Movie)
     fun getNoteByMovieId(movieId: Int): Int
 
 }

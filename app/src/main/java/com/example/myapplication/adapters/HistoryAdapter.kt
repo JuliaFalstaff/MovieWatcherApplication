@@ -36,6 +36,7 @@ class HistoryAdapter: RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>() {
             binding.apply {
                 textViewMovieTitle.text = data.title
                 textViewRuntimeHistory.text = data.runtime.toString()
+                textViewMovieNote.text = data.note.toString()
                 Picasso.get().load("https://image.tmdb.org/t/p/w500${data.poster_path}").into(imageViewPosterHistory)
             }
         }

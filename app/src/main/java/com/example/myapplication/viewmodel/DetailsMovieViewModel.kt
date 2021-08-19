@@ -62,10 +62,23 @@ class DetailsMovieViewModel(
     }
 
     fun saveMovieToDB(movie: Movie) {
-        historyRepository.saveEntity(movie)
+        Thread {
+            historyRepository.saveEntity(movie)
+        }.start()
     }
 
     fun saveNoteToDB(movie: Movie) {
+        Thread {
         historyRepository.saveNoteEntity(0,movie.id, movie.note)
+        }.start()
     }
+
+    fun saveNoteMovieToDataBase(movie: Movie) {
+        historyRepository.saveNoteMovieEntity(movie)
+    }
+
+
+
+
+
 }

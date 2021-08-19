@@ -41,16 +41,25 @@ fun convertHistoryEntityToMovie(entityList: List<HistoryEntity>): MutableList<Mo
             id = it.film_Id?.toInt(),
             title = it.title,
             poster_path = it.poster_path,
-            runtime = it.runtime)
+            runtime = it.runtime,
+            note = it.note)
     }.toMutableList()
 }
 
 fun convertMovieToEntity(movie: Movie): HistoryEntity {
-    return HistoryEntity(0, movie.id, movie.title, movie.poster_path, movie.runtime)
+    return HistoryEntity(0, movie.id, movie.title, movie.poster_path, movie.runtime, movie.note)
+}
+
+fun convertNoteMovieToEntity(movie: Movie): NoteEntity {
+    return NoteEntity(0, movie.id, movie.note)
 }
 
 fun convertMovieToNoteEntity(id: Long, movieId: Int?, note: String?): NoteEntity =
     NoteEntity(0,movieId, note)
+
+fun convertEntityToMovieNote(entity: NoteEntity) : Movie {
+    return Movie(id = entity.movieId, note = entity.note)
+}
 
 
 

@@ -7,7 +7,7 @@ import com.example.myapplication.room.NoteEntity
 import com.example.myapplication.view.convertHistoryEntityToMovie
 import com.example.myapplication.view.convertMovieToEntity
 import com.example.myapplication.view.convertMovieToNoteEntity
-
+import com.example.myapplication.view.convertNoteMovieToEntity
 
 
 class LocalRepositoryImpl(
@@ -29,6 +29,10 @@ class LocalRepositoryImpl(
 
     override fun saveNoteEntity(id: Long, movieId: Int?, note: String?) {
         localDataSourceNote.insert(convertMovieToNoteEntity(0,movieId,note))
+    }
+
+    override fun saveNoteMovieEntity(movie: Movie) {
+        return localDataSourceNote.insert(convertNoteMovieToEntity(movie))
     }
 
 

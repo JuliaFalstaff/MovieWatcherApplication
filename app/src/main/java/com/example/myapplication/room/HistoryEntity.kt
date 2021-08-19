@@ -12,4 +12,5 @@ data class HistoryEntity(
     val title: String?,
     val poster_path: String?,
     val runtime: Int?,
+    var note: String?
     )

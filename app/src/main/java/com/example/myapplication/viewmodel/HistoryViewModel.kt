@@ -19,4 +19,9 @@ class HistoryViewModel(
         historyLiveData.value = AppState.Loading
         historyLiveData.value = AppState.Success(historyRepository.getAllHistory())
     }
+
+    fun getAllNotes() {
+        historyLiveData.value = AppState.Loading
+            historyLiveData.postValue(AppState.SuccessMovieNotes(historyRepository.getAllNotes()))
+    }
 }
