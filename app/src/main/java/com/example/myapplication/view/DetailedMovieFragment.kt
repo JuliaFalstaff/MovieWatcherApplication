@@ -96,20 +96,13 @@ class DetailedMovieFragment : Fragment() {
             textViewYearOfRelease.text = movie.release_date.toString()
             textViewPopularity.text = movie.vote_average.toString()
             textViewRuntime.text = movie.runtime.toString()
-            saveMovie(movie)
 
             buttonSaveNote.setOnClickListener {
-//                val noteTextDescription = editTextNote.text.toString()
-//                textViewNoteDescription.text = noteTextDescription
-//                saveNoteToDB(movie)
-//                textViewNoteDescription.text = movie.note.toString()
                 movie.note = editTextNote.text.toString()
                 textViewNoteDescription.setText(editTextNote.text)
                 saveNoteToDB(movie)
+                saveMovie(movie)
             }
-
-
-
         }
         Picasso
             .get()
@@ -120,25 +113,27 @@ class DetailedMovieFragment : Fragment() {
             .get()
             .load(BASE_URL + FILE_SIZE + movie.backdrop_path)
             .into(binding.imageViewBackgroundPoster)
-
-
     }
 
     private fun saveMovie(movie: Movie) {
         viewModel.saveMovieToDB(
-            Movie(movie.id, movie.original_title, movie.title, movie.release_date,
+            Movie(
+                movie.id, movie.original_title, movie.title, movie.release_date,
                 movie.overview, movie.poster_path, movie.vote_average, movie.runtime,
-                movie.backdrop_path, movie.adult, movie.note)
+                movie.backdrop_path, movie.adult, movie.note
+            )
         )
     }
 
-    private fun saveNoteToDB (movie: Movie) {
-        viewModel.saveNoteMovieToDataBase(Movie(movie.id, movie.original_title, movie.title, movie.release_date,
-            movie.overview, movie.poster_path, movie.vote_average, movie.runtime,
-            movie.backdrop_path, movie.adult, movie.note))
+    private fun saveNoteToDB(movie: Movie) {
+        viewModel.saveNoteMovieToDataBase(
+            Movie(
+                movie.id, movie.original_title, movie.title, movie.release_date,
+                movie.overview, movie.poster_path, movie.vote_average, movie.runtime,
+                movie.backdrop_path, movie.adult, movie.note
+            )
+        )
     }
-
-
 
     override fun onDestroyView() {
         super.onDestroyView()
