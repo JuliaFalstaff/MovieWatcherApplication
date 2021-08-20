@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import com.example.myapplication.app.App.Companion.getHistoryDao
 import com.example.myapplication.app.App.Companion.getNoteDao
 import com.example.myapplication.model.AppState
-import com.example.myapplication.model.data.Movie
 import com.example.myapplication.model.repository.LocalRepository
 import com.example.myapplication.model.repository.LocalRepositoryImpl
 
@@ -18,10 +17,5 @@ class HistoryViewModel(
     fun getAllHistory() {
         historyLiveData.value = AppState.Loading
         historyLiveData.value = AppState.Success(historyRepository.getAllHistory())
-    }
-
-    fun getAllNotes() {
-        historyLiveData.value = AppState.Loading
-            historyLiveData.postValue(AppState.SuccessMovieNotes(historyRepository.getAllNotes()))
     }
 }

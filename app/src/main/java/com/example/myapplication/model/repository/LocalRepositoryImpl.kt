@@ -3,7 +3,6 @@ package com.example.myapplication.model.repository
 import com.example.myapplication.model.data.Movie
 import com.example.myapplication.room.HistoryDao
 import com.example.myapplication.room.NoteDao
-import com.example.myapplication.room.NoteEntity
 import com.example.myapplication.view.*
 
 
@@ -36,13 +35,5 @@ class LocalRepositoryImpl(
     override fun getNoteByMovieId(movieId: Int): Int {
         return localDataSourceNote.getId(movieId)
     }
-
-
-
-
-
-
-
-
 }
 

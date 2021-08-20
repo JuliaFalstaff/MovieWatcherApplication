@@ -34,7 +34,6 @@ fun convertDtoToModel(movieDTO: MovieDTO): MutableList<Movie> {
     )
 }
 
-
 fun convertHistoryEntityToMovie(entityList: List<HistoryEntity>): MutableList<Movie> {
     return entityList.map {
         Movie(

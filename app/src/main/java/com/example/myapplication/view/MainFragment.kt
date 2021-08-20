@@ -18,7 +18,6 @@ import com.example.myapplication.viewmodel.MainViewModel
 
 private const val FIRST_PAGE = 1
 
-
 class MainFragment : Fragment() {
 
     companion object {

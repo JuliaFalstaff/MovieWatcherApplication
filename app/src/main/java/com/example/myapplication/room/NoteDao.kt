@@ -1,7 +1,6 @@
 package com.example.myapplication.room
 
 import androidx.room.*
-import com.example.myapplication.model.data.Movie
 
 @Dao
 interface NoteDao {

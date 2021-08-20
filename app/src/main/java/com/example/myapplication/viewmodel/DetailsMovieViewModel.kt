@@ -20,8 +20,13 @@ private const val CORRUPTED_DATA = "Неполные данные"
 
 class DetailsMovieViewModel(
     val detailsLiveData: MutableLiveData<AppState> = MutableLiveData(),
-    private val detailsMovieRepositoryImpl: DetailsMovieRepository = DetailsMovieRepositoryImpl(RemoteDataSource()),
-    private val historyRepository: LocalRepository = LocalRepositoryImpl(getHistoryDao(), getNoteDao())
+    private val detailsMovieRepositoryImpl: DetailsMovieRepository = DetailsMovieRepositoryImpl(
+        RemoteDataSource()
+    ),
+    private val historyRepository: LocalRepository = LocalRepositoryImpl(
+        getHistoryDao(),
+        getNoteDao()
+    )
 ) : ViewModel() {
 
     fun getMovieFromRemoteSource(id: Int?) {
@@ -69,7 +74,7 @@ class DetailsMovieViewModel(
 
     fun saveNoteMovieToDataBase(movie: Movie) {
         Thread {
-        historyRepository.saveNoteMovieEntity(movie)
+            historyRepository.saveNoteMovieEntity(movie)
         }.start()
     }
 
@@ -79,9 +84,4 @@ class DetailsMovieViewModel(
             detailsLiveData.postValue(AppState.SuccessMovieNotes(historyRepository.getAllNotes()))
         }.start()
     }
-
-
-
-
-
 }

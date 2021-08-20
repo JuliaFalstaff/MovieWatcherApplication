@@ -36,7 +36,6 @@ class App : Application() {
             return dataBase!!.historyDao()
         }
 
-
         fun getNoteDao(): NoteDao {
             if (dataBase == null) {
                 synchronized(DataBase::class.java) {
