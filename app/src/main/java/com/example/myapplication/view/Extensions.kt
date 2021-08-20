@@ -57,17 +57,13 @@ fun convertNoteMovieToEntity(movie: Movie): NoteEntity {
 fun convertMovieToNoteEntity(id: Long, movieId: Int?, note: String?): NoteEntity =
     NoteEntity(0,movieId, note)
 
-fun convertEntityToMovieNote(entity: NoteEntity) : Movie {
-    return Movie(id = entity.movieId, note = entity.note)
+fun convertEntityToMovieNote(entityList: List<NoteEntity>): List<Movie> {
+    return entityList.map{
+        Movie(id = it.movieId, note = it.note)
+    }
 }
 
 
-
-
-
-fun convertNoteEntityToString(entity: NoteEntity) : String? {
-    return entity.note
-}
 
 
 

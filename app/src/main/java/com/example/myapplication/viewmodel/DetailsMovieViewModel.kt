@@ -67,14 +67,17 @@ class DetailsMovieViewModel(
         }.start()
     }
 
-    fun saveNoteToDB(movie: Movie) {
+    fun saveNoteMovieToDataBase(movie: Movie) {
         Thread {
-        historyRepository.saveNoteEntity(0,movie.id, movie.note)
+        historyRepository.saveNoteMovieEntity(movie)
         }.start()
     }
 
-    fun saveNoteMovieToDataBase(movie: Movie) {
-        historyRepository.saveNoteMovieEntity(movie)
+    fun getAllNotes() {
+        detailsLiveData.value = AppState.Loading
+        Thread {
+            detailsLiveData.postValue(AppState.SuccessMovieNotes(historyRepository.getAllNotes()))
+        }.start()
     }
 
 

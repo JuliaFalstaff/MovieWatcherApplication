@@ -4,10 +4,7 @@ import com.example.myapplication.model.data.Movie
 import com.example.myapplication.room.HistoryDao
 import com.example.myapplication.room.NoteDao
 import com.example.myapplication.room.NoteEntity
-import com.example.myapplication.view.convertHistoryEntityToMovie
-import com.example.myapplication.view.convertMovieToEntity
-import com.example.myapplication.view.convertMovieToNoteEntity
-import com.example.myapplication.view.convertNoteMovieToEntity
+import com.example.myapplication.view.*
 
 
 class LocalRepositoryImpl(
@@ -23,8 +20,8 @@ class LocalRepositoryImpl(
         return localDataSource.insert(convertMovieToEntity(movie))
     }
 
-    override fun getAllNotes(): List<NoteEntity> {
-        return localDataSourceNote.allNotes()
+    override fun getAllNotes(): List<Movie>  {
+        return convertEntityToMovieNote(localDataSourceNote.allNotes())
     }
 
     override fun saveNoteEntity(id: Long, movieId: Int?, note: String?) {
