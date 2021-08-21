@@ -36,4 +36,11 @@
     <string name="poster">Poster</string>
     <string name="movie_note">Movie Note</string>
     <string name="note_description">Note Description</string>
+    <string name="content_provider">Content Provider</string>
+    <string name="alert_title">Доступ к контактам</string>
+    <string name="alert_message">Разрешите предоставить доступ к контактам для загрузки в приложение</string>
+    <string name="alert_apply">Предоставить доступ</string>
+    <string name="alert_decline">Отклонить</string>
+    <string name="alert_decline_message">Доступ к данным не предоставлен. Контакты загружены не будут</string>
+    <string name="alert_decline_button">Закрыть</string>
 </resources>

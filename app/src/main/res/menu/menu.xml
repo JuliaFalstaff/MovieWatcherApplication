@@ -36,4 +36,10 @@
         android:title="@string/menu_history"
         app:showAsAction="ifRoom"/>
 
+    <item
+        android:id="@+id/action_content_provider"
+        android:icon="@drawable/ic_action_contact"
+        android:title="@string/content_provider"
+        app:showAsAction="ifRoom"/>
+
 </menu>
