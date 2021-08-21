@@ -24,7 +24,7 @@ class LocalRepositoryImpl(
     }
 
     override fun saveNoteEntity(id: Long, movieId: Int?, note: String?) {
-        localDataSourceNote.insert(convertMovieToNoteEntity(0,movieId,note))
+        localDataSourceNote.insert(convertMovieToNoteEntity(0, movieId, note))
     }
 
     override fun saveNoteMovieEntity(movie: Movie) {

@@ -7,7 +7,7 @@ interface HistoryDao {
     @Query("SELECT * FROM HistoryEntity")
     fun all(): List<HistoryEntity>
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(entity: HistoryEntity)
 
     @Update
