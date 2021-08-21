@@ -12,7 +12,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.myapplication.R
+import com.example.myapplication.adapters.ContactAdapter
 import com.example.myapplication.databinding.FragmentContentProviderBinding
+import com.example.myapplication.model.AppState
 import com.example.myapplication.viewmodel.ContentProviderViewModel
 
 class ContentProviderFragment : Fragment() {
@@ -20,6 +22,9 @@ class ContentProviderFragment : Fragment() {
     private lateinit var binding: FragmentContentProviderBinding
     private val viewModel: ContentProviderViewModel by lazy {
         ViewModelProvider(this).get(ContentProviderViewModel::class.java)
+    }
+    private val adapter: ContactAdapter by lazy {
+        ContactAdapter()
     }
 
 
@@ -33,15 +38,32 @@ class ContentProviderFragment : Fragment() {
             savedInstanceState: Bundle?,
     ): View? {
         binding = FragmentContentProviderBinding.inflate(layoutInflater, container, false)
+        binding.contentProviderRecyclerView.adapter = adapter
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        checkPermisson()
+        viewModel.contacts.observe(viewLifecycleOwner) { renderData(it) }
+        checkPermission()
     }
 
-    private fun checkPermisson() {
+    private fun renderData(data: AppState?) {
+        when(data) {
+            is AppState.SuccessContentProvider -> {
+                binding.contentProviderRecyclerView.show()
+                binding.loadingLayout.hide()
+                adapter.contacts = data.contact
+            }
+            is AppState.Loading-> {
+                binding.contentProviderRecyclerView.hide()
+                binding.loadingLayout.show()
+            }
+        }
+
+    }
+
+    private fun checkPermission() {
         context?.let {
             when {
                 ContextCompat.checkSelfPermission(it, android.Manifest.permission.READ_CONTACTS) ==
@@ -88,10 +110,24 @@ class ContentProviderFragment : Fragment() {
             }
 
     private fun getContacts() {
-        Toast.makeText(requireContext(), "Get Contacts", Toast.LENGTH_SHORT).show()
+        viewModel.getContacts()
     }
 
     companion object {
         fun newInstance() = ContentProviderFragment()
+    }
+
+    private fun View.show(): View {
+        if (visibility != View.VISIBLE) {
+            visibility = View.VISIBLE
+        }
+        return this
+    }
+
+    private fun View.hide(): View {
+        if (visibility != View.GONE) {
+            visibility = View.GONE
+        }
+        return this
     }
 }
