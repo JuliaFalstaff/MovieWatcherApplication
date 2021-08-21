@@ -16,10 +16,6 @@ import com.example.myapplication.model.data.Movie
 import com.example.myapplication.viewmodel.DetailsMovieViewModel
 import com.squareup.picasso.Picasso
 
-
-private const val API_KEY = "3d4eed70b3bf0c001506c22b79833ff1"
-private const val LANGUAGE = "en-US"
-private const val MAIN_LINK = "https://api.themoviedb.org/3/movie/"
 private const val FILE_SIZE = "w500"
 private const val BASE_URL = "https://image.tmdb.org/t/p/"
 
@@ -96,6 +92,13 @@ class DetailedMovieFragment : Fragment() {
             textViewYearOfRelease.text = movie.release_date.toString()
             textViewPopularity.text = movie.vote_average.toString()
             textViewRuntime.text = movie.runtime.toString()
+
+            buttonSaveNote.setOnClickListener {
+                movie.note = editTextNote.text.toString()
+                textViewNoteDescription.setText(editTextNote.text)
+                saveNoteToDB(movie)
+                saveMovie(movie)
+            }
         }
         Picasso
             .get()
@@ -108,11 +111,27 @@ class DetailedMovieFragment : Fragment() {
             .into(binding.imageViewBackgroundPoster)
     }
 
+    private fun saveMovie(movie: Movie) {
+        viewModel.saveMovieToDB(
+            Movie(
+                movie.id, movie.original_title, movie.title, movie.release_date,
+                movie.overview, movie.poster_path, movie.vote_average, movie.runtime,
+                movie.backdrop_path, movie.adult, movie.note
+            )
+        )
+    }
+
+    private fun saveNoteToDB(movie: Movie) {
+        viewModel.saveNoteMovieToDataBase(
+            Movie(
+                movie.id, movie.original_title, movie.title, movie.release_date,
+                movie.overview, movie.poster_path, movie.vote_average, movie.runtime,
+                movie.backdrop_path, movie.adult, movie.note
+            )
+        )
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
     }
 }
-
-
-
-

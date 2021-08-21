@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical"
+    tools:context=".view.SettingsFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="@string/setting_text"
+        android:textSize="@dimen/text_size" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switchAdult"
+        android:layout_margin="@dimen/margin_8_dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/adult"
+        android:textOff="@string/off"
+        android:textOn="@string/on" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

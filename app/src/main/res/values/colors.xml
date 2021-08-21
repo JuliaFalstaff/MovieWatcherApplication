@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="loadingBackground">#808080</color>
     <color name="fragmentBackground">#FFFFFF</color>
+    <color name="ic_history_background">#3DDC84</color>
 </resources>

@@ -21,4 +21,19 @@
         android:orderInCategory="3"
         app:showAsAction="always"
         android:title="@string/action_rated" />
+
+    <item
+        android:id="@+id/action_settings"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:orderInCategory="5"
+        android:title="@string/menu_settings"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/action_history"
+        android:icon="@drawable/ic_history_foreground"
+        android:orderInCategory="5"
+        android:title="@string/menu_history"
+        app:showAsAction="ifRoom"/>
+
 </menu>

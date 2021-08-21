@@ -1,11 +1,14 @@
-package com.example.myapplication.view
+package com.example.myapplication.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.databinding.MainFragmentRecyclerItemBinding
 import com.example.myapplication.model.data.Movie
+import com.example.myapplication.view.MainFragment
+import com.example.myapplication.view.MainFragment.Companion.isAdultMovie
 import com.squareup.picasso.Picasso
 
 private const val BASE_URL = "https://image.tmdb.org/t/p/w500/"
@@ -13,15 +16,33 @@ private const val BASE_URL = "https://image.tmdb.org/t/p/w500/"
 class MainFragmentAdapter(private var onItemViewClickListener: MainFragment.OnItemViewClickListener?) :
     RecyclerView.Adapter<MainFragmentAdapter.MainViewHolder>() {
 
-    private var movieData: List<Movie> = listOf()
+    private var movieData: MutableList<Movie> = mutableListOf()
 
     fun removeListener() {
         onItemViewClickListener = null
     }
 
-    fun setMovie(data: List<Movie>) {
+    fun setMovie(data: MutableList<Movie>) {
         movieData = data
+        checkIsAdultSettings(movieData)
         notifyDataSetChanged()
+    }
+
+    fun deleteMovie(position: Int) {
+        movieData.removeAt(position)
+        notifyDataSetChanged()
+    }
+
+    private fun checkIsAdultSettings(movieData: MutableList<Movie>) : MutableList<Movie> {
+        if (!isAdultMovie) {
+            Log.d("Movie", "check in adapter")
+            for(i in 0 until movieData.size){
+                if(movieData[i].adult){
+                    deleteMovie(i)
+                }
+            }
+        }
+        return movieData
     }
 
     override fun onCreateViewHolder(

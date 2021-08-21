@@ -2,11 +2,12 @@ package com.example.myapplication.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.myapplication.app.App.Companion.getHistoryDao
+import com.example.myapplication.app.App.Companion.getNoteDao
 import com.example.myapplication.model.AppState
+import com.example.myapplication.model.data.Movie
 import com.example.myapplication.model.dto.MovieDTO
-import com.example.myapplication.model.repository.DetailsMovieRepository
-import com.example.myapplication.model.repository.DetailsMovieRepositoryImpl
-import com.example.myapplication.model.repository.RemoteDataSource
+import com.example.myapplication.model.repository.*
 import com.example.myapplication.view.convertDtoToModel
 import retrofit2.Call
 import retrofit2.Callback
@@ -19,8 +20,13 @@ private const val CORRUPTED_DATA = "Неполные данные"
 
 class DetailsMovieViewModel(
     val detailsLiveData: MutableLiveData<AppState> = MutableLiveData(),
-    private val detailsMovieRepositoryImpl: DetailsMovieRepository =
-        DetailsMovieRepositoryImpl(RemoteDataSource())
+    private val detailsMovieRepositoryImpl: DetailsMovieRepository = DetailsMovieRepositoryImpl(
+        RemoteDataSource()
+    ),
+    private val historyRepository: LocalRepository = LocalRepositoryImpl(
+        getHistoryDao(),
+        getNoteDao()
+    )
 ) : ViewModel() {
 
     fun getMovieFromRemoteSource(id: Int?) {
@@ -58,5 +64,24 @@ class DetailsMovieViewModel(
         } else {
             AppState.Success(convertDtoToModel(serverResponse))
         }
+    }
+
+    fun saveMovieToDB(movie: Movie) {
+        Thread {
+            historyRepository.saveEntity(movie)
+        }.start()
+    }
+
+    fun saveNoteMovieToDataBase(movie: Movie) {
+        Thread {
+            historyRepository.saveNoteMovieEntity(movie)
+        }.start()
+    }
+
+    fun getAllNotes() {
+        detailsLiveData.value = AppState.Loading
+        Thread {
+            detailsLiveData.postValue(AppState.SuccessMovieNotes(historyRepository.getAllNotes()))
+        }.start()
     }
 }

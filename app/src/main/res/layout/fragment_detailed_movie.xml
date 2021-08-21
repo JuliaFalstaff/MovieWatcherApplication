@@ -17,7 +17,7 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageViewBackgroundPoster"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="200dp"
             android:scaleType="centerCrop"
             android:adjustViewBounds="true"
             app:layout_constraintEnd_toEndOf="parent"
@@ -59,6 +59,26 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageViewPoster"
             app:layout_constraintVertical_bias="0.622" />
+
+        <EditText
+            android:id="@+id/editTextNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/description"
+            android:textSize="@dimen/text_size_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDescription" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonSaveNote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_save"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextNote" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageViewPoster"
@@ -167,6 +187,15 @@
             app:layout_constraintBottom_toBottomOf="@+id/ImageViewPopularity"
             app:layout_constraintStart_toStartOf="@+id/textViewRuntimeLabel"
             app:layout_constraintTop_toBottomOf="@+id/textViewRuntimeLabel" />
+
+
+        <TextView
+            android:id="@+id/textViewNoteDescription"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:text="@string/note_description"
+            app:layout_constraintStart_toStartOf="@+id/textViewPopularityLabel"
+            app:layout_constraintTop_toBottomOf="@+id/textViewPopularityLabel" />
 
         <TextView
             android:id="@+id/textViewPopularity"
