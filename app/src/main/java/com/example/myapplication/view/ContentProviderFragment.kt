@@ -7,15 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentContentProviderBinding
 import com.example.myapplication.viewmodel.ContentProviderViewModel
-import java.util.jar.Manifest
-
-const val REQUEST_CODE = 42
 
 class ContentProviderFragment : Fragment() {
 
@@ -55,7 +53,7 @@ class ContentProviderFragment : Fragment() {
                             .setTitle(R.string.alert_title)
                             .setMessage(R.string.alert_message)
                             .setPositiveButton(R.string.alert_apply) { _, _ ->
-                                requestPermission()
+                                requestPermissionLauncher.launch(android.Manifest.permission.READ_CONTACTS)
                             }
                             .setNegativeButton(R.string.alert_decline) { dialog, _ ->
                                 dialog.dismiss()
@@ -64,20 +62,16 @@ class ContentProviderFragment : Fragment() {
                             .show()
                 }
                 else -> {
-                    requestPermission()
+                    requestPermissionLauncher.launch(android.Manifest.permission.READ_CONTACTS)
                 }
             }
         }
     }
 
-    private fun requestPermission() {
-        requestPermissions(arrayOf(android.Manifest.permission.READ_CONTACTS), REQUEST_CODE)
-    }
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        when (requestCode) {
-            REQUEST_CODE -> {
-                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+    private val requestPermissionLauncher =
+            registerForActivityResult(ActivityResultContracts.RequestPermission()
+            ) { isGranted: Boolean ->
+                if (isGranted) {
                     getContacts()
                 } else {
                     context?.let {
@@ -91,14 +85,10 @@ class ContentProviderFragment : Fragment() {
                                 .show()
                     }
                 }
-                return
             }
-        }
-
-    }
 
     private fun getContacts() {
-        Toast.makeText(context, "Get Contacts", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), "Get Contacts", Toast.LENGTH_SHORT).show()
     }
 
     companion object {
