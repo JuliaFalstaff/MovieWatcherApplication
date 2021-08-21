@@ -67,6 +67,10 @@ class MainActivity : AppCompatActivity() {
                 addFragment(HistoryFragment())
                 return true
             }
+            R.id.action_content_provider -> {
+                addFragment(ContentProviderFragment())
+                return true
+            }
         }
         return super.onOptionsItemSelected(item)
     }

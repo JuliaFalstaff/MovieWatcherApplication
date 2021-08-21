@@ -1,6 +1,7 @@
 package com.example.myapplication.app
 
 import android.app.Application
+import android.content.Context
 import androidx.room.Room
 import com.example.myapplication.room.*
 
@@ -10,9 +11,12 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         appInstance = this
+        context = applicationContext
     }
 
     companion object {
+
+        lateinit var context: Context
 
         private var appInstance: App? = null
         private var dataBase: DataBase? = null
@@ -53,4 +57,13 @@ class App : Application() {
             return dataBase!!.noteDao()
         }
     }
+}
+
+interface IContextProvider {
+    val context: Context
+}
+
+object ContextProvider : IContextProvider {
+    override val context: Context
+        get() = App.context
 }
