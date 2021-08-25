@@ -1,5 +1,7 @@
 package com.example.myapplication.view
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.location.Address
 import android.location.Geocoder
@@ -9,6 +11,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentGoogleMapsBinding
 
@@ -27,6 +31,8 @@ class GoogleMapsFragment : Fragment() {
 
     private val callback = OnMapReadyCallback { googleMap ->
         map = googleMap
+
+
         val initialPlace = LatLng(54.98296090807848, 82.89598294067132)
         googleMap.addMarker(
             MarkerOptions().position(initialPlace).title(getString(R.string.marker_start))
@@ -37,6 +43,7 @@ class GoogleMapsFragment : Fragment() {
             addMarkerToArray(it)
             drawLine()
         }
+        activateMyLocation(googleMap)
     }
 
     override fun onCreateView(
@@ -131,6 +138,15 @@ class GoogleMapsFragment : Fragment() {
                     ZOOM_CAMERA
                 )
             )
+        }
+    }
+
+    private fun activateMyLocation(googleMap: GoogleMap) {
+        context?.let {
+            val isPermissionGranted = ContextCompat.checkSelfPermission(it, Manifest.permission.ACCESS_FINE_LOCATION) ==
+                    PackageManager.PERMISSION_GRANTED
+            googleMap.isMyLocationEnabled = isPermissionGranted
+            googleMap.uiSettings.isMyLocationButtonEnabled = isPermissionGranted
         }
     }
 
