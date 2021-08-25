@@ -36,4 +36,10 @@
     <string name="poster">Poster</string>
     <string name="movie_note">Movie Note</string>
     <string name="note_description">Note Description</string>
+    <string name="action_geo">Geo</string>
+    <string name="action_google_map">Google Map</string>
+    <string name="text_google_map_search">Москва, Красная площадь 1</string>
+    <string name="default_address">Red Square, 1, Moscow</string>
+    <string name="button_search_map">Search</string>
+    <string name="marker_start">Marker Start</string>
 </resources>

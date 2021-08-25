@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.myapplication.R
 import com.example.myapplication.databinding.MainActivityBinding
@@ -67,9 +68,14 @@ class MainActivity : AppCompatActivity() {
                 addFragment(HistoryFragment())
                 return true
             }
+            R.id.action_google_map -> {
+                addFragment(GoogleMapsFragment())
+                return true
+            }
         }
         return super.onOptionsItemSelected(item)
     }
+
 
     override fun onDestroy() {
         super.onDestroy()
