@@ -28,23 +28,23 @@ class GoogleMapsFragment : Fragment() {
     private val callback = OnMapReadyCallback { googleMap ->
         map = googleMap
         val initialPlace = LatLng(54.98296090807848, 82.89598294067132)
-        googleMap.addMarker(MarkerOptions().position(initialPlace).title(getString(R.string.marker_start)))
+        googleMap.addMarker(
+            MarkerOptions().position(initialPlace).title(getString(R.string.marker_start))
+        )
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(initialPlace))
         googleMap.setOnMapLongClickListener {
             getAddressAsync(it)
             addMarkerToArray(it)
             drawLine()
         }
-
     }
 
-
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View? {
-        binding = FragmentGoogleMapsBinding.inflate(inflater, container, false )
+        binding = FragmentGoogleMapsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -62,9 +62,11 @@ class GoogleMapsFragment : Fragment() {
                 try {
                     val addresses = geoCoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
                     binding.apply {
-                        textAddressMap.post { textAddressMap.text = addresses.first().getAddressLine(0) }
+                        textAddressMap.post {
+                            textAddressMap.text = addresses.first().getAddressLine(0)
+                        }
                     }
-                } catch (e: IOException){
+                } catch (e: IOException) {
                     e.printStackTrace()
                 }
             }.start()
@@ -81,26 +83,23 @@ class GoogleMapsFragment : Fragment() {
             MarkerOptions()
                 .position(location)
                 .title(searchText)
-                .icon(BitmapDescriptorFactory.fromResource(resourceId)))
+                .icon(BitmapDescriptorFactory.fromResource(resourceId))
         )
     }
 
-
-
     private fun drawLine() {
         val last: Int = markers.size - 1
-        if(last >= 1) {
+        if (last >= 1) {
             val previous: LatLng = markers[last - 1].position
             val current: LatLng = markers[last].position
             map.addPolyline(
                 PolylineOptions()
                     .add(previous, current)
                     .color(Color.RED)
-                    .width(5f)
+                    .width(ZOOM_DRAW_LINE)
             )
         }
     }
-
 
     private fun initSearchByAddress() {
         binding.buttonSearchMap.setOnClickListener {
@@ -110,7 +109,7 @@ class GoogleMapsFragment : Fragment() {
                 try {
                     val addresses = geoCoder.getFromLocationName(searchText, 1)
                     if (addresses.size > 0) {
-                        goToAddress (addresses, it, searchText)
+                        goToAddress(addresses, it, searchText)
                     }
                 } catch (e: IOException) {
                     e.printStackTrace()
@@ -129,15 +128,17 @@ class GoogleMapsFragment : Fragment() {
             map.moveCamera(
                 CameraUpdateFactory.newLatLngZoom(
                     location,
-                    15f
+                    ZOOM_CAMERA
                 )
             )
         }
     }
 
-
     companion object {
-        fun newInstance() : GoogleMapsFragment {
+        private const val ZOOM_DRAW_LINE = 5f
+        private const val ZOOM_CAMERA = 15f
+
+        fun newInstance(): GoogleMapsFragment {
             return GoogleMapsFragment()
         }
     }
