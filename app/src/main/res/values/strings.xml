@@ -42,4 +42,5 @@
     <string name="default_address">Red Square, 1, Moscow</string>
     <string name="button_search_map">Search</string>
     <string name="marker_start">Marker Start</string>
+    <string name="country_production">Country</string>
 </resources>

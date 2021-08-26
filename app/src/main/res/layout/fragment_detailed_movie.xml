@@ -197,6 +197,27 @@
             app:layout_constraintStart_toStartOf="@+id/textViewPopularityLabel"
             app:layout_constraintTop_toBottomOf="@+id/textViewPopularityLabel" />
 
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/imageViewIconGeo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:backgroundTint="@color/white"
+            android:src="@drawable/ic_action_geolocation"
+            app:layout_constraintStart_toStartOf="@+id/textViewNoteDescription"
+            app:layout_constraintTop_toBottomOf="@+id/textViewNoteDescription" />
+
+        <TextView
+            android:id="@+id/textViewGeoOfCountry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/country_production"
+            android:textSize="@dimen/text_size_of_country_production"
+            app:layout_constraintBottom_toBottomOf="@+id/imageViewIconGeo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageViewIconGeo"
+            app:layout_constraintTop_toTopOf="@+id/imageViewIconGeo" />
+
         <TextView
             android:id="@+id/textViewPopularity"
             android:layout_width="81dp"

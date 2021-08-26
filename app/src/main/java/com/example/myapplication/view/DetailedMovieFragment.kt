@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -92,6 +93,10 @@ class DetailedMovieFragment : Fragment() {
             textViewYearOfRelease.text = movie.release_date.toString()
             textViewPopularity.text = movie.vote_average.toString()
             textViewRuntime.text = movie.runtime.toString()
+            textViewGeoOfCountry.text = movie.production_countries?.get(0)?.name
+            imageViewIconGeo.setOnClickListener {
+                Toast.makeText(context, "Image Button Clicked", Toast.LENGTH_SHORT).show()
+            }
 
             buttonSaveNote.setOnClickListener {
                 movie.note = editTextNote.text.toString()

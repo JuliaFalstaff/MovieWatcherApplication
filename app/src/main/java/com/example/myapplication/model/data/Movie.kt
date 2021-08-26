@@ -16,7 +16,8 @@ data class Movie(
     val runtime: Int? = 0,
     val backdrop_path: String? = "",
     val adult: Boolean = false,
-    var note: String? = ""
+    var note: String? = "",
+    val production_countries: MutableList<CountriesOfProduction>? = null
 ) : Parcelable
 
 
