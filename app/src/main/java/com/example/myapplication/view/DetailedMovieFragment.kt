@@ -96,6 +96,7 @@ class DetailedMovieFragment : Fragment() {
             textViewGeoOfCountry.text = movie.production_countries?.get(0)?.name
             imageViewIconGeo.setOnClickListener {
                 Toast.makeText(context, "Image Button Clicked", Toast.LENGTH_SHORT).show()
+                openGoogleMapsFragment(movie)
             }
 
             buttonSaveNote.setOnClickListener {
@@ -124,6 +125,17 @@ class DetailedMovieFragment : Fragment() {
                 movie.backdrop_path, movie.adult, movie.note
             )
         )
+    }
+
+    private fun openGoogleMapsFragment(movie: Movie) {
+        activity?.supportFragmentManager?.apply {
+            beginTransaction()
+                .add(R.id.container, GoogleMapsFragment.newInstance(Bundle().apply {
+                    putParcelable(GoogleMapsFragment.BUNDLE_EXTRA, movie)
+                }))
+                .addToBackStack("")
+                .commitAllowingStateLoss()
+        }
     }
 
     private fun saveNoteToDB(movie: Movie) {

@@ -15,6 +15,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentGoogleMapsBinding
+import com.example.myapplication.model.data.Movie
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -28,12 +29,14 @@ class GoogleMapsFragment : Fragment() {
     private lateinit var map: GoogleMap
     private val markers: ArrayList<Marker> = arrayListOf()
     private lateinit var binding: FragmentGoogleMapsBinding
+    private lateinit var movieBundle: Movie
+    private lateinit var initialPlace: LatLng
 
     private val callback = OnMapReadyCallback { googleMap ->
         map = googleMap
 
+        initialPlace = getLocationFromAddress(movieBundle.production_countries?.get(0)?.name)
 
-        val initialPlace = LatLng(54.98296090807848, 82.89598294067132)
         googleMap.addMarker(
             MarkerOptions().position(initialPlace).title(getString(R.string.marker_start))
         )
@@ -44,6 +47,16 @@ class GoogleMapsFragment : Fragment() {
             drawLine()
         }
         activateMyLocation(googleMap)
+    }
+
+    private fun getLocationFromAddress(address: String?): LatLng {
+        val geoCoder = Geocoder(context)
+        if (address != null) {
+            geoCoder.getFromLocationName(address, 1).also {
+                return LatLng(it[0].latitude, it[0].longitude)
+            }
+        } else
+            return LatLng(54.98296090807848, 82.89598294067132)
     }
 
     override fun onCreateView(
@@ -57,6 +70,7 @@ class GoogleMapsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        movieBundle = arguments?.getParcelable<Movie>(GoogleMapsFragment.BUNDLE_EXTRA) ?: Movie()
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
         initSearchByAddress()
@@ -143,8 +157,9 @@ class GoogleMapsFragment : Fragment() {
 
     private fun activateMyLocation(googleMap: GoogleMap) {
         context?.let {
-            val isPermissionGranted = ContextCompat.checkSelfPermission(it, Manifest.permission.ACCESS_FINE_LOCATION) ==
-                    PackageManager.PERMISSION_GRANTED
+            val isPermissionGranted =
+                ContextCompat.checkSelfPermission(it, Manifest.permission.ACCESS_FINE_LOCATION) ==
+                        PackageManager.PERMISSION_GRANTED
             googleMap.isMyLocationEnabled = isPermissionGranted
             googleMap.uiSettings.isMyLocationButtonEnabled = isPermissionGranted
         }
@@ -154,8 +169,13 @@ class GoogleMapsFragment : Fragment() {
         private const val ZOOM_DRAW_LINE = 5f
         private const val ZOOM_CAMERA = 15f
 
-        fun newInstance(): GoogleMapsFragment {
-            return GoogleMapsFragment()
+        const val BUNDLE_EXTRA = "movie"
+
+
+        fun newInstance(bundle: Bundle): GoogleMapsFragment {
+            val fragment = GoogleMapsFragment()
+            fragment.arguments = bundle
+            return fragment
         }
     }
 }

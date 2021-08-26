@@ -23,8 +23,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="@string/default_address" />
+            android:hint="@string/address_hint"
+            android:inputType="textPersonName" />
 
         <Button
             android:id="@+id/buttonSearchMap"

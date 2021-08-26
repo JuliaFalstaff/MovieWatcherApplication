@@ -43,4 +43,17 @@
     <string name="button_search_map">Search</string>
     <string name="marker_start">Marker Start</string>
     <string name="country_production">Country</string>
+    <string name="dialo_title_no_gps">Доступ к геолокации закрыт</string>
+    <string name="dialog_message_no_gps">"Разрешите доступ к геолокации, если хотите увидеть геолокацию страны "</string>
+    <string name="dialog_button_close">Закрыть</string>
+    <string name="dialog_rationale_title">Доступ к геолокации</string>
+    <string name="dialog_rationale_message">Предоставьте доступ, если хотите увидеть локацию</string>
+    <string name="dialog_rationale_give_access">Предоставить доступ</string>
+    <string name="dialog_rationale_decline">Отклонить</string>
+    <string name="title_dialog_gps_turned_off">GPS выключен</string>
+    <string name="dialog_message_last_location_unknown">Location unknown</string>
+    <string name="dialog_message_last_location_known">Last known location</string>
+    <string name="dialog_address_title">Address</string>
+    <string name="dialog_address_get_country_location">Get Country Location</string>
+    <string name="address_hint">Type address here</string>
 </resources>
