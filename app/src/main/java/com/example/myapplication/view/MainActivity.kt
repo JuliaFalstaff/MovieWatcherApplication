@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.myapplication.R
 import com.example.myapplication.databinding.MainActivityBinding
@@ -53,7 +52,7 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
             R.id.action_rated -> {
-                addFragment(RatedMovieFragment())
+                addFragment(TopRatedMovieFragment())
                 return true
             }
             R.id.action_main -> {

@@ -26,6 +26,7 @@ class MainFragmentAdapter(private var onItemViewClickListener: MainFragment.OnIt
         movieData = data
         checkIsAdultSettings(movieData)
         notifyDataSetChanged()
+        Log.i("ANDROID", "set  movie from adapter")
     }
 
     fun deleteMovie(position: Int) {

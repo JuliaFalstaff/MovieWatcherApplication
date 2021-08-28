@@ -29,4 +29,7 @@ class RemoteDataSource {
     fun getMovieList(page: Int, callback: Callback<MovieList>) {
         movieAPI.getMovieList(API_KEY, LANGUAGE, page).enqueue(callback)
     }
+    fun getTopRatedMovieList(page: Int, callback: Callback<MovieList>) {
+        movieAPI.getMovieTopRated(API_KEY, LANGUAGE, page).enqueue(callback)
+    }
 }

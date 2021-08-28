@@ -7,8 +7,13 @@ import retrofit2.Callback
 
 class RepositoryImpl(private val remoteDataSource: RemoteDataSource) : Repository {
     override fun getMovieFromServer() = Movie()
+
     override fun getMoviesListFromServer(page: Int, callback: Callback<MovieList>) {
         remoteDataSource.getMovieList(page, callback)
+    }
+
+    override fun getMovieTopRatedListFromServer(page: Int, callback: Callback<MovieList>) {
+        remoteDataSource.getTopRatedMovieList(page, callback)
     }
 }
 
