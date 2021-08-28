@@ -94,8 +94,11 @@ class DetailedMovieFragment : Fragment() {
             textViewPopularity.text = movie.vote_average.toString()
             textViewRuntime.text = movie.runtime.toString()
             textViewGeoOfCountry.text = movie.production_countries?.get(0)?.name
+            textViewGenre.text = movie.genres?.get(0)?.name
             imageViewIconGeo.setOnClickListener {
-                Toast.makeText(context, "Image Button Clicked", Toast.LENGTH_SHORT).show()
+                openGoogleMapsFragment(movie)
+            }
+            textViewGeoOfCountry.setOnClickListener {
                 openGoogleMapsFragment(movie)
             }
 

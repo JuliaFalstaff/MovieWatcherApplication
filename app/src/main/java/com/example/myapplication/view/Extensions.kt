@@ -32,7 +32,8 @@ fun convertDtoToModel(movieDTO: MovieDTO): MutableList<Movie> {
             movieDTO.backdrop_path.toString(),
             movieDTO.adult == true,
             "," ,
-            movieDTO.production_countries
+            movieDTO.production_countries,
+            movieDTO.genres
         )
     )
 }

@@ -19,10 +19,9 @@ private const val DEFAULT_PAGE = 1
 class MainViewModel() : ViewModel() {
 
     val liveDataToObserve: MutableLiveData<AppState> = MutableLiveData()
-    private val timer: Long = 1000
     private val repositoryImpl: RepositoryImpl =
         RepositoryImpl(RemoteDataSource())
-    private val movieList: MutableList<Movie> = mutableListOf()
+
 
     fun getMoviesListFromServer(page: Int) {
         liveDataToObserve.value = AppState.Loading

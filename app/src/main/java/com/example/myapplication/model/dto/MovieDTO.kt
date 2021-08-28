@@ -1,6 +1,7 @@
 package com.example.myapplication.model.dto
 
 import com.example.myapplication.model.data.CountriesOfProduction
+import com.example.myapplication.model.data.Genre
 
 data class MovieDTO(
         val id: Int?,
@@ -13,5 +14,6 @@ data class MovieDTO(
         val vote_average: Double?,
         val runtime: Int?,
         val adult: Boolean?,
-        val production_countries: MutableList<CountriesOfProduction>
+        val production_countries: MutableList<CountriesOfProduction>,
+        val genres: MutableList<Genre>
 )
