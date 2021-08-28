@@ -35,7 +35,7 @@ class GoogleMapsFragment : Fragment() {
     private val callback = OnMapReadyCallback { googleMap ->
         map = googleMap
 
-        initialPlace = getLocationFromAddress(movieBundle.production_countries?.get(0)?.name)
+        initialPlace = getLocationFromAddress(movieBundle.production_countries?.firstOrNull()?.name)
 
         googleMap.addMarker(
             MarkerOptions().position(initialPlace).title(getString(R.string.marker_start))

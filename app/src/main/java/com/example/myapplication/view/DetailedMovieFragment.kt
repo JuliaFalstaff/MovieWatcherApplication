@@ -85,16 +85,15 @@ class DetailedMovieFragment : Fragment() {
     }
 
     private fun setMovie(movie: Movie) {
-        val id = movieBundle.id
-        with(binding) {
+        with(binding)  {
             textViewOriginalTitle.text = movie.title.toString()
             textViewDescription.text = movie.overview
             textViewTitle.text = movie.title
             textViewYearOfRelease.text = movie.release_date.toString()
             textViewPopularity.text = movie.vote_average.toString()
             textViewRuntime.text = movie.runtime.toString()
-            textViewGeoOfCountry.text = movie.production_countries?.get(0)?.name
-            textViewGenre.text = movie.genres?.get(0)?.name
+            textViewGeoOfCountry.text = movie.production_countries?.firstOrNull()?.name
+            textViewGenre.text = movie.genres?.firstOrNull()?.name
             imageViewIconGeo.setOnClickListener {
                 openGoogleMapsFragment(movie)
             }
