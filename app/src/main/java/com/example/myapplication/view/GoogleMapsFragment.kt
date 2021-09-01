@@ -51,12 +51,13 @@ class GoogleMapsFragment : Fragment() {
 
     private fun getLocationFromAddress(address: String?): LatLng {
         val geoCoder = Geocoder(context)
+
         if (address != null) {
             geoCoder.getFromLocationName(address, 1).also {
-                return LatLng(it[0].latitude, it[0].longitude)
+                return LatLng(it.first().latitude, it.first().longitude)
             }
         } else
-            return LatLng(54.98296090807848, 82.89598294067132)
+            return LatLng(DEFAULT_LATITUDE, DEFAULT_LONGITUDE)
     }
 
     override fun onCreateView(
@@ -129,7 +130,7 @@ class GoogleMapsFragment : Fragment() {
             Thread {
                 try {
                     val addresses = geoCoder.getFromLocationName(searchText, 1)
-                    if (addresses.size > 0) {
+                    if (addresses.isNotEmpty()) {
                         goToAddress(addresses, it, searchText)
                     }
                 } catch (e: IOException) {
@@ -168,7 +169,8 @@ class GoogleMapsFragment : Fragment() {
     companion object {
         private const val ZOOM_DRAW_LINE = 5f
         private const val ZOOM_CAMERA = 15f
-
+        private const val DEFAULT_LATITUDE = 54.98296090807848
+        private const val DEFAULT_LONGITUDE = 82.89598294067132
         const val BUNDLE_EXTRA = "movie"
 
 
