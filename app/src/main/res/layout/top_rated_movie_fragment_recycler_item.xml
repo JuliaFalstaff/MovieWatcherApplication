@@ -71,8 +71,6 @@
                 android:paddingStart="@dimen/padding"
                 android:text="@string/year_of_release"
                 android:textSize="@dimen/text_size_detailed_info" />
-
-
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

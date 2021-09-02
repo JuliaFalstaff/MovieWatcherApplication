@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -84,14 +85,21 @@ class DetailedMovieFragment : Fragment() {
     }
 
     private fun setMovie(movie: Movie) {
-        val id = movieBundle.id
-        with(binding) {
+        with(binding)  {
             textViewOriginalTitle.text = movie.title.toString()
             textViewDescription.text = movie.overview
             textViewTitle.text = movie.title
             textViewYearOfRelease.text = movie.release_date.toString()
             textViewPopularity.text = movie.vote_average.toString()
             textViewRuntime.text = movie.runtime.toString()
+            textViewGeoOfCountry.text = movie.production_countries?.firstOrNull()?.name
+            textViewGenre.text = movie.genres?.firstOrNull()?.name
+            imageViewIconGeo.setOnClickListener {
+                openGoogleMapsFragment(movie)
+            }
+            textViewGeoOfCountry.setOnClickListener {
+                openGoogleMapsFragment(movie)
+            }
 
             buttonSaveNote.setOnClickListener {
                 movie.note = editTextNote.text.toString()
@@ -119,6 +127,17 @@ class DetailedMovieFragment : Fragment() {
                 movie.backdrop_path, movie.adult, movie.note
             )
         )
+    }
+
+    private fun openGoogleMapsFragment(movie: Movie) {
+        activity?.supportFragmentManager?.apply {
+            beginTransaction()
+                .add(R.id.container, GoogleMapsFragment.newInstance(Bundle().apply {
+                    putParcelable(GoogleMapsFragment.BUNDLE_EXTRA, movie)
+                }))
+                .addToBackStack("")
+                .commitAllowingStateLoss()
+        }
     }
 
     private fun saveNoteToDB(movie: Movie) {

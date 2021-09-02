@@ -60,8 +60,10 @@ class MainFragment : Fragment() {
         readSettings()
         Log.d("Movie", "on view created")
         binding.mainFragmentRecyclerView.adapter = adapter
+        Log.i("ANDROID", "bind Adapter main")
         viewModel.liveDataToObserve.observe(viewLifecycleOwner) { renderData(it) }
         viewModel.getMoviesListFromServer(FIRST_PAGE)
+        Log.i("ANDROID", "getMovie w/callback main")
     }
 
     private fun readSettings() {
@@ -76,6 +78,7 @@ class MainFragment : Fragment() {
             is AppState.Success -> {
                 binding.loadingLayout.visibility = View.GONE
                 adapter.setMovie(appState.movieData)
+
             }
             is AppState.Loading -> {
                 binding.loadingLayout.visibility = View.VISIBLE

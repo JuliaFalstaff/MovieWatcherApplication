@@ -1,9 +1,9 @@
 package com.example.myapplication.viewmodel
 
+
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.myapplication.model.AppState
-import com.example.myapplication.model.data.Movie
 import com.example.myapplication.model.data.MovieList
 import com.example.myapplication.model.repository.RemoteDataSource
 import com.example.myapplication.model.repository.RepositoryImpl
@@ -11,21 +11,20 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 private const val SERVER_ERROR = "Ошибка сервера"
 private const val REQUEST_ERROR = "Ошибка запроса на сервер"
 private const val CORRUPTED_DATA = "Неполные данные"
-private const val DEFAULT_PAGE = 1
 
-class MainViewModel() : ViewModel() {
+
+class TopRatedMovieViewModel() : ViewModel() {
 
     val liveDataToObserve: MutableLiveData<AppState> = MutableLiveData()
-    private val repositoryImpl: RepositoryImpl =
-        RepositoryImpl(RemoteDataSource())
+    private val repositoryImpl: RepositoryImpl = RepositoryImpl(RemoteDataSource())
 
-
-    fun getMoviesListFromServer(page: Int) {
+    fun getTopRatedMovieList(page: Int) {
         liveDataToObserve.value = AppState.Loading
-        repositoryImpl.getMoviesListFromServer(page, callback)
+        repositoryImpl.getMovieTopRatedListFromServer(page, callback)
     }
 
     private val callback = object : Callback<MovieList> {
@@ -54,7 +53,3 @@ class MainViewModel() : ViewModel() {
         }
     }
 }
-
-
-
-

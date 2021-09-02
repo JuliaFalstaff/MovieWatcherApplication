@@ -8,4 +8,5 @@ import retrofit2.Callback
 interface Repository {
     fun getMovieFromServer() : Movie
     fun getMoviesListFromServer(page: Int, callback: Callback<MovieList>)
+    fun getMovieTopRatedListFromServer(page: Int, callback: Callback<MovieList>)
 }

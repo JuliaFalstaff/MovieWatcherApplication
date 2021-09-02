@@ -29,7 +29,11 @@ fun convertDtoToModel(movieDTO: MovieDTO): MutableList<Movie> {
             movieDTO.poster_path.toString(),
             movieDTO.vote_average,
             movieDTO.runtime,
-            movieDTO.backdrop_path.toString()
+            movieDTO.backdrop_path.toString(),
+            movieDTO.adult == true,
+            "," ,
+            movieDTO.production_countries,
+            movieDTO.genres
         )
     )
 }

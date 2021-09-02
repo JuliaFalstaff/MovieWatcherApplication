@@ -21,5 +21,12 @@ interface MovieAPI {
         @Query("language") language: String,
         @Query("page") page: Int,
     ) : Call<MovieList>
+
+    @GET("3/movie/top_rated")
+    fun getMovieTopRated (
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String,
+        @Query("page") page: Int,
+    ) : Call<MovieList>
 }
 

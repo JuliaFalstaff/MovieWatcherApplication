@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
             R.id.action_rated -> {
-                addFragment(RatedMovieFragment())
+                addFragment(TopRatedMovieFragment())
                 return true
             }
             R.id.action_main -> {
@@ -67,9 +67,14 @@ class MainActivity : AppCompatActivity() {
                 addFragment(HistoryFragment())
                 return true
             }
+            R.id.action_google_map -> {
+                addFragment(GoogleMapsFragment())
+                return true
+            }
         }
         return super.onOptionsItemSelected(item)
     }
+
 
     override fun onDestroy() {
         super.onDestroy()
