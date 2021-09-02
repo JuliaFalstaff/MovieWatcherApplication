@@ -14,9 +14,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.IOException
 
-private const val SERVER_ERROR = "Ошибка сервера"
-private const val REQUEST_ERROR = "Ошибка запроса на сервер"
-private const val CORRUPTED_DATA = "Неполные данные"
+
 
 class DetailsMovieViewModel(
     val detailsLiveData: MutableLiveData<AppState> = MutableLiveData(),
@@ -83,5 +81,11 @@ class DetailsMovieViewModel(
         Thread {
             detailsLiveData.postValue(AppState.SuccessMovieNotes(historyRepository.getAllNotes()))
         }.start()
+    }
+
+    companion object {
+        private const val SERVER_ERROR = "Ошибка сервера"
+        private const val REQUEST_ERROR = "Ошибка запроса на сервер"
+        private const val CORRUPTED_DATA = "Неполные данные"
     }
 }

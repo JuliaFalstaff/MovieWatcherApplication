@@ -18,7 +18,6 @@ import com.example.myapplication.viewmodel.TopRatedMovieViewModel
 import kotlinx.android.synthetic.main.fragment_top_rated_movie.*
 
 
-private const val FIRST_PAGE = 1
 
 class TopRatedMovieFragment : Fragment() {
     private lateinit var binding: FragmentTopRatedMovieBinding
@@ -87,6 +86,8 @@ class TopRatedMovieFragment : Fragment() {
     }
 
     companion object {
+
+        private const val FIRST_PAGE = 1
         fun newInstance() = TopRatedMovieFragment()
     }
 }

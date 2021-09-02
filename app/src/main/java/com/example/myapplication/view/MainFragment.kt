@@ -16,11 +16,11 @@ import com.example.myapplication.model.data.Movie
 import com.example.myapplication.view.SettingsFragment.Companion.IS_ADULT_SETTING
 import com.example.myapplication.viewmodel.MainViewModel
 
-private const val FIRST_PAGE = 1
 
 class MainFragment : Fragment() {
 
     companion object {
+        private const val FIRST_PAGE = 1
         fun newInstance() = MainFragment()
         var isAdultMovie: Boolean = false
     }
