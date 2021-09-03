@@ -14,7 +14,6 @@ class LocalRepositoryImpl(
         return convertHistoryEntityToMovie(localDataSource.all())
     }
 
-
     override fun saveEntity(movie: Movie) {
         return localDataSource.insert(convertMovieToEntity(movie))
     }
@@ -35,5 +34,6 @@ class LocalRepositoryImpl(
     override fun getNoteByMovieId(movieId: Int): Int {
         return localDataSourceNote.getId(movieId)
     }
+
 }
 

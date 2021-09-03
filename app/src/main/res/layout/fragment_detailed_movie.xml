@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/fragmentBackground"
     tools:context=".view.DetailedMovieFragment">
 
@@ -18,8 +18,8 @@
             android:id="@+id/imageViewBackgroundPoster"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:scaleType="centerCrop"
             android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -32,8 +32,18 @@
             android:textAlignment="textStart"
             android:textSize="@dimen/text_size"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/imageViewBackgroundPoster"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imageViewBackgroundPoster" />
+
+        <CheckBox
+            android:id="@+id/checkBoxAddToFavourite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_16_dp"
+            android:button="@drawable/ic_action_favourite"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewTitle"
+            app:layout_constraintStart_toEndOf="@+id/textViewTitle"
+            app:layout_constraintTop_toTopOf="@+id/textViewTitle" />
 
         <TextView
             android:id="@+id/textViewOriginalTitle"
@@ -86,8 +96,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="12dp"
-            android:scaleType="fitXY"
             android:adjustViewBounds="true"
+            android:scaleType="fitXY"
             android:src="@drawable/poster_lost_in_translation"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewOriginalTitle" />
@@ -122,9 +132,9 @@
             android:id="@+id/ImageViewPopularity"
             android:layout_width="31dp"
             android:layout_height="49dp"
-            android:src="@drawable/ic_action_rated"
             android:adjustViewBounds="true"
             android:paddingBottom="@dimen/margin_16_dp"
+            android:src="@drawable/ic_action_rated"
             app:layout_constraintStart_toStartOf="@+id/textViewRuntime"
             app:layout_constraintTop_toTopOf="@+id/textViewPopularity" />
 
@@ -179,9 +189,9 @@
             android:id="@+id/textViewPopularityLabel"
             android:layout_width="150dp"
             android:layout_height="50dp"
+            android:layout_marginTop="8dp"
             android:paddingTop="@dimen/margin_4_dp"
             android:text="@string/popularity_label"
-            android:layout_marginTop="8dp"
             android:textAlignment="viewStart"
             android:textSize="@dimen/text_size_detailed_info"
             app:layout_constraintBottom_toBottomOf="@+id/ImageViewPopularity"

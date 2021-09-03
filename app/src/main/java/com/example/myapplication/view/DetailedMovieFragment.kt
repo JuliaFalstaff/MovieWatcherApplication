@@ -105,6 +105,13 @@ class DetailedMovieFragment : Fragment() {
                 saveNoteToDB(movie)
                 saveMovie(movie)
             }
+            saveMovie(movie)
+
+            checkBoxAddToFavourite.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
+                    saveFavouriteMovie(movie)
+                }
+            }
         }
         Picasso
             .get()
@@ -124,6 +131,16 @@ class DetailedMovieFragment : Fragment() {
                 movie.overview, movie.poster_path, movie.vote_average, movie.runtime,
                 movie.backdrop_path, movie.adult, movie.note
             )
+        )
+    }
+
+    private fun saveFavouriteMovie(movie: Movie) {
+        viewModel.saveNFavouriteMovieToDataBase(
+                Movie(
+                        movie.id, movie.original_title, movie.title, movie.release_date,
+                        movie.overview, movie.poster_path, movie.vote_average, movie.runtime,
+                        movie.backdrop_path, movie.adult, movie.note
+                )
         )
     }
 

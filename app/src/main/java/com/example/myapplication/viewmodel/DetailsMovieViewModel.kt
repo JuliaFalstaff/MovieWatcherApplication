@@ -2,6 +2,8 @@ package com.example.myapplication.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.myapplication.app.App
+import com.example.myapplication.app.App.Companion.getFavouriteMovieDao
 import com.example.myapplication.app.App.Companion.getHistoryDao
 import com.example.myapplication.app.App.Companion.getNoteDao
 import com.example.myapplication.model.AppState
@@ -15,14 +17,16 @@ import retrofit2.Response
 import java.io.IOException
 
 class DetailsMovieViewModel(
-    val detailsLiveData: MutableLiveData<AppState> = MutableLiveData(),
-    private val detailsMovieRepositoryImpl: DetailsMovieRepository = DetailsMovieRepositoryImpl(
-        RemoteDataSource()
-    ),
-    private val historyRepository: LocalRepository = LocalRepositoryImpl(
-        getHistoryDao(),
-        getNoteDao()
-    )
+        val detailsLiveData: MutableLiveData<AppState> = MutableLiveData(),
+        private val detailsMovieRepositoryImpl: DetailsMovieRepository = DetailsMovieRepositoryImpl(
+                RemoteDataSource()
+        ),
+        private val historyRepository: LocalRepository = LocalRepositoryImpl(
+                getHistoryDao(),
+                getNoteDao()
+        ),
+        private val favouriteMovieRepository: FavouriteMovieRepository =
+                FavouriteMovieRepositoryImpl(getFavouriteMovieDao()),
 ) : ViewModel() {
 
     fun getMovieFromRemoteSource(id: Int?) {
@@ -31,17 +35,17 @@ class DetailsMovieViewModel(
     }
 
     private val callBack = object :
-        Callback<MovieDTO> {
+            Callback<MovieDTO> {
 
         @Throws(IOException::class)
         override fun onResponse(call: Call<MovieDTO>, response: Response<MovieDTO>) {
             val serverResponse: MovieDTO? = response.body()
             detailsLiveData.postValue(
-                if (response.isSuccessful && serverResponse != null) {
-                    checkResponse(serverResponse)
-                } else {
-                    AppState.Error(Throwable(SERVER_ERROR))
-                }
+                    if (response.isSuccessful && serverResponse != null) {
+                        checkResponse(serverResponse)
+                    } else {
+                        AppState.Error(Throwable(SERVER_ERROR))
+                    }
             )
         }
 
@@ -52,9 +56,9 @@ class DetailsMovieViewModel(
 
     private fun checkResponse(serverResponse: MovieDTO): AppState {
         return if (serverResponse.id == null || serverResponse.original_title == null ||
-            serverResponse.overview == null || serverResponse.poster_path == null || serverResponse.backdrop_path == null ||
-            serverResponse.release_date == null || serverResponse.title == null || serverResponse.vote_average == null ||
-            serverResponse.runtime == null
+                serverResponse.overview == null || serverResponse.poster_path == null || serverResponse.backdrop_path == null ||
+                serverResponse.release_date == null || serverResponse.title == null || serverResponse.vote_average == null ||
+                serverResponse.runtime == null
         ) {
             AppState.Error(Throwable(CORRUPTED_DATA))
         } else {
@@ -73,6 +77,13 @@ class DetailsMovieViewModel(
             historyRepository.saveNoteMovieEntity(movie)
         }.start()
     }
+
+    fun saveNFavouriteMovieToDataBase(movie: Movie) {
+        Thread {
+            favouriteMovieRepository.saveFavouriteMovieEntity(movie)
+        }.start()
+    }
+
 
     companion object {
         private const val SERVER_ERROR = "Ошибка сервера"
