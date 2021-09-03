@@ -6,11 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.databinding.TopRatedMovieFragmentRecyclerItemBinding
 import com.example.myapplication.model.data.Movie
-import com.example.myapplication.view.MainFragment
 import com.example.myapplication.view.TopRatedMovieFragment
 import com.squareup.picasso.Picasso
-
-private const val BASE_URL = "https://image.tmdb.org/t/p/w500/"
 
 class TopRatedMovieAdapter (private var onItemViewClickListener: TopRatedMovieFragment.OnItemViewClickListener?) : RecyclerView.Adapter<TopRatedMovieAdapter.TopRatedViewHolder>() {
 
@@ -52,5 +49,9 @@ class TopRatedMovieAdapter (private var onItemViewClickListener: TopRatedMovieFr
                 .into(imageViewPoster)
             root.setOnClickListener { onItemViewClickListener?.onItemViewClick(movie) }
         }
+    }
+
+    companion object {
+        private const val BASE_URL = "https://image.tmdb.org/t/p/w500/"
     }
 }

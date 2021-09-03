@@ -4,7 +4,6 @@ import com.example.myapplication.model.data.Movie
 import com.example.myapplication.model.data.MovieList
 import retrofit2.Callback
 
-
 class RepositoryImpl(private val remoteDataSource: RemoteDataSource) : Repository {
     override fun getMovieFromServer() = Movie()
 

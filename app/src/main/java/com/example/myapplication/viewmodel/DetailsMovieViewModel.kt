@@ -14,8 +14,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.IOException
 
-
-
 class DetailsMovieViewModel(
     val detailsLiveData: MutableLiveData<AppState> = MutableLiveData(),
     private val detailsMovieRepositoryImpl: DetailsMovieRepository = DetailsMovieRepositoryImpl(
@@ -73,13 +71,6 @@ class DetailsMovieViewModel(
     fun saveNoteMovieToDataBase(movie: Movie) {
         Thread {
             historyRepository.saveNoteMovieEntity(movie)
-        }.start()
-    }
-
-    fun getAllNotes() {
-        detailsLiveData.value = AppState.Loading
-        Thread {
-            detailsLiveData.postValue(AppState.SuccessMovieNotes(historyRepository.getAllNotes()))
         }.start()
     }
 

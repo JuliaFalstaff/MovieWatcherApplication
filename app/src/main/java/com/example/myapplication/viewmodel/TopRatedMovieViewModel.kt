@@ -11,8 +11,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-
-
 class TopRatedMovieViewModel() : ViewModel() {
 
     val liveDataToObserve: MutableLiveData<AppState> = MutableLiveData()

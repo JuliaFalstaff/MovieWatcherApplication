@@ -16,7 +16,6 @@ import com.example.myapplication.model.data.Movie
 import com.example.myapplication.view.SettingsFragment.Companion.IS_ADULT_SETTING
 import com.example.myapplication.viewmodel.MainViewModel
 
-
 class MainFragment : Fragment() {
 
     companion object {

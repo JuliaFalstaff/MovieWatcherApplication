@@ -7,10 +7,6 @@ import retrofit2.Callback
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-private const val API_KEY = "3d4eed70b3bf0c001506c22b79833ff1"
-private const val LANGUAGE = "en-US"
-private const val MAIN_URL = "https://api.themoviedb.org/"
-
 class RemoteDataSource {
     private val movieAPI = Retrofit.Builder()
             .baseUrl(MAIN_URL)
@@ -31,5 +27,11 @@ class RemoteDataSource {
     }
     fun getTopRatedMovieList(page: Int, callback: Callback<MovieList>) {
         movieAPI.getMovieTopRated(API_KEY, LANGUAGE, page).enqueue(callback)
+    }
+
+    companion object {
+        private const val API_KEY = "3d4eed70b3bf0c001506c22b79833ff1"
+        private const val LANGUAGE = "en-US"
+        private const val MAIN_URL = "https://api.themoviedb.org/"
     }
 }
