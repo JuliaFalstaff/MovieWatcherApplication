@@ -11,12 +11,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-
-private const val SERVER_ERROR = "Ошибка сервера"
-private const val REQUEST_ERROR = "Ошибка запроса на сервер"
-private const val CORRUPTED_DATA = "Неполные данные"
-
-
 class TopRatedMovieViewModel() : ViewModel() {
 
     val liveDataToObserve: MutableLiveData<AppState> = MutableLiveData()
@@ -51,5 +45,11 @@ class TopRatedMovieViewModel() : ViewModel() {
         } else {
             AppState.Success(fact)
         }
+    }
+
+    companion object {
+        private const val SERVER_ERROR = "Ошибка сервера"
+        private const val REQUEST_ERROR = "Ошибка запроса на сервер"
+        private const val CORRUPTED_DATA = "Неполные данные"
     }
 }

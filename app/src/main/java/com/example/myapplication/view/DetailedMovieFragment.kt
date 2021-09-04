@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -16,9 +15,6 @@ import com.example.myapplication.model.AppState
 import com.example.myapplication.model.data.Movie
 import com.example.myapplication.viewmodel.DetailsMovieViewModel
 import com.squareup.picasso.Picasso
-
-private const val FILE_SIZE = "w500"
-private const val BASE_URL = "https://image.tmdb.org/t/p/"
 
 
 class DetailedMovieFragment : Fragment() {
@@ -32,6 +28,8 @@ class DetailedMovieFragment : Fragment() {
 
     companion object {
         const val BUNDLE_EXTRA = "movie"
+        private const val FILE_SIZE = "w500"
+        private const val BASE_URL = "https://image.tmdb.org/t/p/"
 
         fun newInstance(bundle: Bundle): DetailedMovieFragment {
             val fragment = DetailedMovieFragment()
@@ -66,17 +64,17 @@ class DetailedMovieFragment : Fragment() {
         when (appState) {
             is AppState.Success -> {
                 detailedMovieView.visibility = View.VISIBLE
-                detailedLoadingLayout.visibility = View.GONE
+                includedLoadingLayout.loadingLayout.visibility = View.GONE
                 setMovie(appState.movieData.first())
 
             }
             is AppState.Loading -> {
                 detailedMovieView.visibility = View.GONE
-                detailedLoadingLayout.visibility = View.VISIBLE
+                includedLoadingLayout.loadingLayout.visibility = View.VISIBLE
             }
             is AppState.Error -> {
                 detailedMovieView.visibility = View.VISIBLE
-                detailedLoadingLayout.visibility = View.GONE
+                includedLoadingLayout.loadingLayout.visibility = View.GONE
                 detailedMovieView.showSnackBar(getString(R.string.error_appstate),
                     getString(R.string.reload_appstate),
                     { viewModel.getMovieFromRemoteSource(movieBundle.id) })
@@ -107,6 +105,13 @@ class DetailedMovieFragment : Fragment() {
                 saveNoteToDB(movie)
                 saveMovie(movie)
             }
+            saveMovie(movie)
+
+            checkBoxAddToFavourite.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
+                    saveFavouriteMovie(movie)
+                }
+            }
         }
         Picasso
             .get()
@@ -126,6 +131,16 @@ class DetailedMovieFragment : Fragment() {
                 movie.overview, movie.poster_path, movie.vote_average, movie.runtime,
                 movie.backdrop_path, movie.adult, movie.note
             )
+        )
+    }
+
+    private fun saveFavouriteMovie(movie: Movie) {
+        viewModel.saveNFavouriteMovieToDataBase(
+                Movie(
+                        movie.id, movie.original_title, movie.title, movie.release_date,
+                        movie.overview, movie.poster_path, movie.vote_average, movie.runtime,
+                        movie.backdrop_path, movie.adult, movie.note
+                )
         )
     }
 

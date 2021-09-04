@@ -13,7 +13,6 @@ class HistoryViewModel(
     private val historyRepository: LocalRepository = LocalRepositoryImpl(getHistoryDao(), getNoteDao())
 ) : ViewModel() {
 
-
     fun getAllHistory() {
         historyLiveData.value = AppState.Loading
         Thread {

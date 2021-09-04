@@ -7,14 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.myapplication.databinding.FragmentSettingBinding
-import kotlin.properties.Delegates
 
 
 class SettingsFragment : Fragment() {
 
     private lateinit var binding: FragmentSettingBinding
     private var isAdult: Boolean = false
-
 
     companion object {
         const val IS_ADULT_SETTING = "ADULT_SETTING"

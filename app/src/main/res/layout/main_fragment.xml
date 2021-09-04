@@ -21,21 +21,11 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/main_fragment_recycler_item" />
 
-        <FrameLayout
-            android:id="@+id/loadingLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone"
-            tools:layout_editor_absoluteX="9dp"
-            tools:layout_editor_absoluteY="5dp"
-            tools:visibility="visible">
+   </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <ProgressBar
-                style="?android:attr/progressBarStyleLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center" />
-        </FrameLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include
+        android:id="@+id/includedLoadingLayout"
+        layout="@layout/loading_layout" />
 
 </FrameLayout>

@@ -3,6 +3,7 @@ package com.example.myapplication.view
 import android.view.View
 import com.example.myapplication.model.data.Movie
 import com.example.myapplication.model.dto.MovieDTO
+import com.example.myapplication.room.FavouriteMovieEntity
 import com.example.myapplication.room.HistoryEntity
 import com.example.myapplication.room.NoteEntity
 import com.google.android.material.snackbar.Snackbar
@@ -64,6 +65,21 @@ fun convertEntityToMovieNote(entityList: List<NoteEntity>): List<Movie> {
     return entityList.map{
         Movie(id = it.movieId, note = it.note)
     }
+}
+
+fun convertFavouriteMovieEntityToMovie(entityList: List<FavouriteMovieEntity>): MutableList<Movie> {
+    return entityList.map {
+        Movie(
+                id = it.film_Id?.toInt(),
+                title = it.title,
+                poster_path = it.poster_path,
+                runtime = it.runtime,
+                vote_average = it.vote_average)
+    }.toMutableList()
+}
+
+fun convertMovieToFavouriteMoveEntity(movie: Movie) : FavouriteMovieEntity {
+    return FavouriteMovieEntity(0, movie.id, movie.title, movie.poster_path, movie.runtime, movie.vote_average)
 }
 
 

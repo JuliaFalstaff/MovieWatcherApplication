@@ -46,16 +46,16 @@ class HistoryFragment : Fragment() {
         when (appState) {
             is AppState.Success -> {
                 binding.historyFragmentRecyclerView.visibility = View.VISIBLE
-                binding.loadingLayout.visibility = View.GONE
+                binding.includedLoadingLayout.loadingLayout.visibility = View.GONE
                 adapter.setData(appState.movieData)
             }
             is AppState.Loading -> {
                 binding.historyFragmentRecyclerView.visibility = View.GONE
-                binding.loadingLayout.visibility = View.VISIBLE
+                binding.includedLoadingLayout.loadingLayout.visibility = View.VISIBLE
             }
             is AppState.Error -> {
                 binding.historyFragmentRecyclerView.visibility = View.VISIBLE
-                binding.loadingLayout.visibility = View.GONE
+                binding.includedLoadingLayout.loadingLayout.visibility = View.GONE
                 binding.historyFragmentRecyclerView.showSnackBar(
                     getString(R.string.error),
                     getString(R.string.reload),

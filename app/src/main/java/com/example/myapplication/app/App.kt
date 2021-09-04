@@ -29,6 +29,7 @@ class App : Application() {
                             DataBase::class.java,
                             DB_NAME)
                             .allowMainThreadQueries()
+                            .fallbackToDestructiveMigration()
                             .build()
                     }
                 }
@@ -46,11 +47,30 @@ class App : Application() {
                                 DataBase::class.java,
                                 DB_NAME)
                                 .allowMainThreadQueries()
+                                .fallbackToDestructiveMigration()
                                 .build()
                     }
                 }
             }
             return dataBase!!.noteDao()
+        }
+
+        fun getFavouriteMovieDao(): FavouriteMovieDao {
+            if (dataBase == null) {
+                synchronized(DataBase::class.java) {
+                    if (dataBase == null) {
+                        if (appInstance == null) throw IllegalStateException("Application is null while creating DataBase")
+                        dataBase = Room.databaseBuilder(
+                                appInstance!!.applicationContext,
+                                DataBase::class.java,
+                                DB_NAME)
+                                .allowMainThreadQueries()
+                                .fallbackToDestructiveMigration()
+                                .build()
+                    }
+                }
+            }
+            return dataBase!!.favouriteMovieDao()
         }
     }
 }

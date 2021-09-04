@@ -11,7 +11,6 @@ import com.example.myapplication.view.MainFragment
 import com.example.myapplication.view.MainFragment.Companion.isAdultMovie
 import com.squareup.picasso.Picasso
 
-private const val BASE_URL = "https://image.tmdb.org/t/p/w500/"
 
 class MainFragmentAdapter(private var onItemViewClickListener: MainFragment.OnItemViewClickListener?) :
     RecyclerView.Adapter<MainFragmentAdapter.MainViewHolder>() {
@@ -80,5 +79,10 @@ class MainFragmentAdapter(private var onItemViewClickListener: MainFragment.OnIt
                 .into(imageViewPoster)
             root.setOnClickListener { onItemViewClickListener?.onItemViewClick(movie) }
         }
+    }
+
+    companion object {
+
+        private const val BASE_URL = "https://image.tmdb.org/t/p/w500/"
     }
 }
