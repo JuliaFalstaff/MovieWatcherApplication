@@ -37,13 +37,6 @@
         app:showAsAction="ifRoom"/>
 
     <item
-        android:id="@+id/action_geolocation"
-        android:icon="@drawable/ic_action_geolocation"
-        android:orderInCategory="6"
-        android:title="@string/action_geo"
-        app:showAsAction="ifRoom"/>
-
-    <item
         android:id="@+id/action_google_map"
         android:icon="@drawable/ic_action_google_map"
         android:orderInCategory="6"

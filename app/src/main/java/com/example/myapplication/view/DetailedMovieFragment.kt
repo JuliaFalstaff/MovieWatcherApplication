@@ -64,17 +64,17 @@ class DetailedMovieFragment : Fragment() {
         when (appState) {
             is AppState.Success -> {
                 detailedMovieView.visibility = View.VISIBLE
-                detailedLoadingLayout.visibility = View.GONE
+                includedLoadingLayout.loadingLayout.visibility = View.GONE
                 setMovie(appState.movieData.first())
 
             }
             is AppState.Loading -> {
                 detailedMovieView.visibility = View.GONE
-                detailedLoadingLayout.visibility = View.VISIBLE
+                includedLoadingLayout.loadingLayout.visibility = View.VISIBLE
             }
             is AppState.Error -> {
                 detailedMovieView.visibility = View.VISIBLE
-                detailedLoadingLayout.visibility = View.GONE
+                includedLoadingLayout.loadingLayout.visibility = View.GONE
                 detailedMovieView.showSnackBar(getString(R.string.error_appstate),
                     getString(R.string.reload_appstate),
                     { viewModel.getMovieFromRemoteSource(movieBundle.id) })

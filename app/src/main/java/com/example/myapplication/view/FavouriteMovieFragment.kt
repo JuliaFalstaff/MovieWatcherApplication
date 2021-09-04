@@ -55,16 +55,16 @@ class FavouriteMovieFragment : Fragment() {
         when (appState) {
             is AppState.Success -> {
                 binding.favouriteMovieFragmentRecyclerView.visibility = View.VISIBLE
-                binding.loadingLayout.visibility = View.GONE
+                binding.includedLoadingLayout.loadingLayout.visibility = View.GONE
                 adapter.setData(appState.movieData)
             }
             is AppState.Loading -> {
                 binding.favouriteMovieFragmentRecyclerView.visibility = View.GONE
-                binding.loadingLayout.visibility = View.VISIBLE
+                binding.includedLoadingLayout.loadingLayout.visibility = View.VISIBLE
             }
             is AppState.Error -> {
                 binding.favouriteMovieFragmentRecyclerView.visibility = View.VISIBLE
-                binding.loadingLayout.visibility = View.GONE
+                binding.includedLoadingLayout.loadingLayout.visibility = View.GONE
                 binding.favouriteMovieFragmentRecyclerView.showSnackBar(
                         getString(R.string.error),
                         getString(R.string.reload),
@@ -74,6 +74,4 @@ class FavouriteMovieFragment : Fragment() {
             }
         }
     }
-
-
 }

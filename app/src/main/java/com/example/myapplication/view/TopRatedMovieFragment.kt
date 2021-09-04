@@ -62,15 +62,15 @@ class TopRatedMovieFragment : Fragment() {
         when (appState) {
             is AppState.Success -> {
                 binding.topRatedFragmentRecyclerView.visibility = View.VISIBLE
-                binding.loadingLayout.visibility = View.GONE
+                binding.includedLoadingLayout.loadingLayout.visibility = View.GONE
                 adapter.setTopRatedMovie(appState.movieData)
 
             }
             is AppState.Loading -> {
-                binding.loadingLayout.visibility = View.VISIBLE
+                binding.includedLoadingLayout.loadingLayout.visibility = View.VISIBLE
             }
             is AppState.Error -> {
-                binding.loadingLayout.visibility = View.GONE
+                binding.includedLoadingLayout.loadingLayout.visibility = View.GONE
                 binding.topRated.showSnackBar(getString(R.string.error_appstate),
                     getString(R.string.reload_appstate),
                     { viewModel.getTopRatedMovieList(FIRST_PAGE) })
